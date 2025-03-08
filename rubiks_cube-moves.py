@@ -490,9 +490,9 @@ def rotate_left_face(points, colors, direction='ccw'):
 
     return points, new_colors
 
-def rotate_bottom_face(points, colors, direction='ccw'):
+def rotate_down_face(points, colors, direction='ccw'):
     """
-    Perform a rotation of the LEFT (L) face by rotating colors at the 12 intersection points.    
+    Perform a rotation of the DOWN (D) face by rotating colors at the 12 intersection points.    
     :param points: List of intersection points
     :param colors: List of colors for the points (current state)
     :param direction: 'cw' for clockwise, 'ccw' for counterclockwise
