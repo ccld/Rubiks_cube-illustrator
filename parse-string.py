@@ -36,3 +36,23 @@ def parse_move_notation(notation_string):
     
     return moves
 
+"""
+example
+checker = 'U2D2L2R2F2B2'
+
+parse_move_notation(checker)
+Out[49]: 
+[('U', 'cw'),
+ ('U', 'cw'),
+ ('D', 'cw'),
+ ('D', 'cw'),
+ ('L', 'cw'),
+ ('L', 'cw'),
+ ('R', 'cw'),
+ ('R', 'cw'),
+ ('F', 'cw'),
+ ('F', 'cw'),
+ ('B', 'cw'),
+ ('B', 'cw')]
+ """
+
