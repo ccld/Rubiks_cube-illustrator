@@ -313,7 +313,7 @@ def rotate_right_face(points, colors, direction='ccw'):
     # Now perform the rotation
     new_colors = colors.copy()
     
-    if direction == 'ccw':
+    if direction == 'cw':
         # For right face, we want to rotate counterclockwise when viewed from right side
         shifted_groups = [groups[1], groups[2], groups[3], groups[0]]
     else:  # cw
