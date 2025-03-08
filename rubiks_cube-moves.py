@@ -621,7 +621,13 @@ def perform_moves(points, colors, moves):
             current_points, current_colors = rotate_front_face(current_points, current_colors, direction)
         elif face == 'R':
             current_points, current_colors = rotate_right_face(current_points, current_colors, direction)
-    
+        elif face == 'L':
+            current_points, current_colors = rotate_left_face(current_points, current_colors, direction)
+        elif face == 'D':
+            current_points, current_colors = rotate_down_face(current_points, current_colors, direction)
+        elif face == 'B':
+            current_points, current_colors = rotate_back_face(current_points, current_colors, direction)
+
     return current_points, current_colors
 
 # Test with multiple moves on different faces
