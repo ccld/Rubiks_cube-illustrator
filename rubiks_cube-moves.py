@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import Circle
 import copy
+import imageio.v2 as imageio
+import os
 
 # Colors for the Rubik's cube faces
 face_colors = {
@@ -94,7 +96,7 @@ def rotate_points(points, center, angle_degrees):
     
     return rotated_points
 
-def create_rubiks_diagram(points, colors):
+def create_rubiks_diagram(points, colors, frame_number):
     """Create the Rubik's Cube Venn diagram."""
     plt.figure(figsize=(6.38, 6.38), dpi = 100)
     ax = plt.subplot(111, aspect='equal')
@@ -115,7 +117,49 @@ def create_rubiks_diagram(points, colors):
     plt.axis('off')
     plt.title("Rubik's Cube Venn Representation", fontsize=14)
     plt.tight_layout()
-    plt.show()
+    
+    # Save the figure to a file instead of displaying it
+    filename = f'circle_frame_{frame_number:03d}.png'
+    plt.savefig(filename, dpi=100)
+    plt.close()  # Close the figure to free memory
+    
+    return filename
+
+def create_animation(turns, output_filename='cercle_animation.gif', fps=12):
+    # Create temporary directory for frames
+    frames = []
+    # Generate each frame
+    n = -1 
+    for x in turns:
+        n = n +1
+        k = turns.index(turns[n]) 
+        if n == 0 :
+                print(k , turns[k], n)    
+                filename = create_rubiks_diagram(initial_points, initial_colors, 0)
+                frames.append(filename)  
+                points_after, colors_after = perform_moves(
+                    initial_points, initial_colors, 
+                    [(turns[k])])
+                filename = create_rubiks_diagram(points_after, colors_after, 1)
+                frames.append(filename)  
+
+        else :
+            print( k, turns[k], n)
+            points_after, colors_after  = perform_moves(
+                                points_after, colors_after,
+                                [(turns[k])])                     
+            filename = create_rubiks_diagram(points_after, colors_after, n+1)
+            frames.append(filename)  
+          
+    # Create GIF from frames
+    with imageio.get_writer('output_name.gif', mode='I', fps=1) as writer:
+        for filename in frames:
+            image = imageio.imread(filename)
+            writer.append_data(image)
+    
+    # Optional: Clean up temporary files
+    for filename in frames:
+        os.remove(filename)
 
 def generate_initial_points():
     """Generate initial intersection points and colors."""
@@ -645,3 +689,22 @@ create_rubiks_diagram(points_after_url, colors_after_url)
 create_rubiks_diagram(initial_points, initial_colors)
 points_after, colors_after = rotate_left_face(initial_points, initial_colors, 'cw')
 create_rubiks_diagram(points_after, colors_after)
+# Example usage:
+# Simple increasing radius
+# Test with multiple moves on different faces
+initial_points, initial_colors = generate_initial_points()
+turns = [('U', 'cw'),
+ ('U', 'cw'),
+ ('D', 'cw'),
+ ('D', 'cw'),
+ ('L', 'cw'),
+ ('L', 'cw'),
+ ('R', 'cw'),
+ ('R', 'cw'),
+ ('F', 'cw'),
+ ('F', 'cw'),
+ ('B', 'cw'),
+ ('B', 'cw')]
+
+create_animation(turns, 'checkerboard', fps=1)
+
