@@ -96,7 +96,7 @@ def rotate_points(points, center, angle_degrees):
 
 def create_rubiks_diagram(points, colors):
     """Create the Rubik's Cube Venn diagram."""
-    plt.figure(figsize=(12,12))
+    plt.figure(figsize=(6.38, 6.38), dpi = 100)
     ax = plt.subplot(111, aspect='equal')
     
     # Draw concentric circles
