@@ -8,7 +8,7 @@ Counterclockwise: white → blue → yellow → green → white
 
 
 """
-
+import numpy as np
 # =====================================================================
 # function to handle UP face rotation
 def rotate_up_face(points, colors, direction='ccw'):
