@@ -1,1 +1,22 @@
-
+| Rubik's Actions                             | Moves                                              |
+|---------------------------------------------|----------------------------------------------------|
+| Change edge                                 | Rr U Fr                                            |
+| Top to bottom                               | Rr Dr R                                            |
+| Facing front                                | F Dr Fr D2                                         |
+| White corner right                          | Dr Rr D R                                          |
+| White corner left                           | D L Dr Lr                                          |
+| Middle   left                               | Ur Lr U L U F Ur Fr                                |
+| Middle right                                | U R Ur Rr Ur Fr U F                                |
+| Unsolved edges if left face                 | F2 U L Rr F2 Lr R U F2                             |
+| Unsolved edges if right face                | F2 Ur Lr Rr F2 Lr R Ur F2                          |
+| Twist   two corners                         | B Rr D2 R Br U2 B Rr D2 R Br U2                    |
+| Flip two edges                              | R U D B2 U2 Br U B U B2 Dr Rr Ur                   |
+|                                             |                                                    |
+| Algorithms of last layer                    |                                                    |
+| Making   cross if you have a horizontal bar | F R U Rr Ur Fr                                     |
+| Making   cross if you have a back-left hook | F U R Ur Rr F                                      |
+| Matching   edge colours-                    | R U Rr U R U2 Rr                                   |
+| Fixing   corners                            | U R Ur Lr U Rr Ur L                                |
+| Matching corners                            | D Rr Dr R                                          |
+|                                             |                                                    |
+| Transform into superflip                    | U R2 F B R B2 R U2 L B2 R Ur Dr R2 F Rr L B2 U2 F2 |
