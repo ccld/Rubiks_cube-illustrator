@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import Circle
 import copy
-import imageio.v2 as imageio
+import cv2
 import os
 
 # Colors for the Rubik's cube faces
@@ -39,6 +39,10 @@ centers = [(0,2.5),(-2,-2*r),(2,-2*r)]
 # Circle radii
 circle_radii = [2.4, 2.8, 3.2]
 
+width = 638
+height = 638
+fps = 1
+directory= "C://Users//HP//Downloads//"
 
 def get_circle_intersections(center1, center2, radius1, radius2):
     """Find the intersection points of two circles."""
@@ -96,7 +100,7 @@ def rotate_points(points, center, angle_degrees):
     
     return rotated_points
 
-def create_rubiks_diagram(points, colors, frame_number):
+def create_rubiks_diagram(points, colors, frame_number, subtext):
     """Create the Rubik's Cube Venn diagram."""
     plt.figure(figsize=(6.38, 6.38), dpi = 100)
     ax = plt.subplot(111, aspect='equal')
@@ -110,7 +114,8 @@ def create_rubiks_diagram(points, colors, frame_number):
     # Draw the intersection points as colored nodes
     for point, color in zip(points, colors):
         plt.plot(point[0], point[1], 'o', markersize=15, markerfacecolor=face_colors[color], markeredgecolor='black')
-    
+        
+    ax.text(-4., -5., subtext)
     # Set plot limits and remove axes
     plt.xlim(-5.5, 5.5)
     plt.ylim(-5.5, 5.5)
@@ -125,7 +130,7 @@ def create_rubiks_diagram(points, colors, frame_number):
     
     return filename
 
-def create_animation(turns, output_filename='cercle_animation.gif', fps=12):
+def create_animation(turns, output_filename='rubiks_animation.avi', fps=1):
     # Create temporary directory for frames
     frames = []
     # Generate each frame
@@ -134,12 +139,14 @@ def create_animation(turns, output_filename='cercle_animation.gif', fps=12):
         n = n +1
         k = turns.index(turns[n]) 
         if n == 0 :
-                print(k , turns[k], n)    
-                filename = create_rubiks_diagram(initial_points, initial_colors, 0)
+                print(k , turns[k], n)  
+                subtitle = 'Set #'+ str(n) + '  for algorithm x'
+                filename = create_rubiks_diagram(initial_points, initial_colors, subtitle)
                 frames.append(filename)  
                 points_after, colors_after = perform_moves(
                     initial_points, initial_colors, 
                     [(turns[k])])
+                subtitle = 'Set #'+ str(n+1) + '  after rotating '+ turns[1][0] + turns[1][1]
                 filename = create_rubiks_diagram(points_after, colors_after, 1)
                 frames.append(filename)  
 
@@ -148,9 +155,17 @@ def create_animation(turns, output_filename='cercle_animation.gif', fps=12):
             points_after, colors_after  = perform_moves(
                                 points_after, colors_after,
                                 [(turns[k])])                     
+            subtitle = 'Set #'+ str(n+1) + '  after rotating '+ turns[n][0] + turns[n][1]                    
             filename = create_rubiks_diagram(points_after, colors_after, n+1)
             frames.append(filename)  
-          
+            
+    fourcc = cv2.VideoWriter_fourcc(*'FFV1')
+    video = cv2.VideoWriter('output_name.avi', fourcc, float(fps), (width, height))
+    for filename in frames:
+        img_path = os.path.join(directory, filename)
+        img = cv2.imread(img_path)
+        video.write(img)   
+        
     # Create GIF from frames
     with imageio.get_writer('output_name.gif', mode='I', fps=1) as writer:
         for filename in frames:
