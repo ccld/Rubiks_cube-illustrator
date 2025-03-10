@@ -1,3 +1,16 @@
+#!/usr/bin/env python
+"""
+Script that allows for face rotations
+
+The rotation follows the color progression:
+Clockwise: white → green → yellow → blue → white
+Counterclockwise: white → blue → yellow → green → white
+
+
+"""
+
+# =====================================================================
+# function to handle UP face rotation
 def rotate_up_face(points, colors, direction='ccw'):
     """
     Perform a rotation of the UP (U) face by rotating colors at the 12 intersection points.  
@@ -110,6 +123,8 @@ def rotate_up_face(points, colors, direction='ccw'):
     
     return points, new_colors
 
+# -------------------------------------------------------------------
+# function to handle RIGHT face rotation
 def rotate_right_face(points, colors, direction='ccw'):
     """
     Perform a rotation of the RIGHT (R) face by rotating colors at the 12 intersection points.    
@@ -163,7 +178,8 @@ def rotate_right_face(points, colors, direction='ccw'):
     
     return points, new_colors
 
-
+# -------------------------------------------------------------------
+# function to handle FRONT face rotation
 def rotate_front_face(points, colors, direction='ccw'):
     """
     Perform a rotation of the FRONT (F) face by rotating colors at the 12 intersection points.    
@@ -271,6 +287,8 @@ def rotate_front_face(points, colors, direction='ccw'):
     
     return points, new_colors
 
+# -------------------------------------------------------------------
+# function to handle LEFT face rotation
 def rotate_left_face(points, colors, direction='ccw'):
     """
     Perform a rotation of the LEFT (L) face by rotating colors at the 12 intersection points.    
@@ -326,6 +344,8 @@ def rotate_left_face(points, colors, direction='ccw'):
 
     return points, new_colors
 
+# -------------------------------------------------------------------
+# function to handle DOWN face rotation
 def rotate_down_face(points, colors, direction='ccw'):
     """
     Perform a rotation of the DOWN (D) face by rotating colors at the 12 intersection points.    
@@ -381,6 +401,8 @@ def rotate_down_face(points, colors, direction='ccw'):
 
     return points, new_colors
 
+# -------------------------------------------------------------------
+# function to handle BACK face rotation
 def rotate_back_face(points, colors, direction='ccw'):
     """
     Perform a rotation of the BACK (B) face by rotating colors at the 12 intersection points.    
@@ -435,3 +457,5 @@ def rotate_back_face(points, colors, direction='ccw'):
             new_colors[orig_group[j]] = colors[new_group[j]]
 
     return points, new_colors
+
+# =====================================================================
