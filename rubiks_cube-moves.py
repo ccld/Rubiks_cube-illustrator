@@ -9,7 +9,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 import copy
-import cv2
 import structure
 # =====================================================================
 
@@ -126,13 +125,15 @@ def create_rubiks_diagram(points, colors, frame_number, subtext):
     plt.axis('off')
     plt.title("Rubik's Cube Venn Representation", fontsize=14)
     plt.tight_layout()
-    
+    plt.show()
     # Save the figure to a file instead of displaying it
     filename = f'circle_frame_{frame_number:03d}.png'
     plt.savefig(filename, dpi=100)
     plt.close()  # Close the figure to free memory
     
     return filename
+    
+
 
 def create_animation(turns, output_filename='rubiks_animation.avi', fps=1):
     # Create temporary directory for frames
@@ -162,8 +163,10 @@ def create_animation(turns, output_filename='rubiks_animation.avi', fps=1):
             subtitle = 'Set #'+ str(n+1) + '  after rotating '+ turns[n][0] + turns[n][1]                    
             filename = create_rubiks_diagram(points_after, colors_after, n+1)
             frames.append(filename)  
-            
-    fourcc = cv2.VideoWriter_fourcc(*'FFV1')
+# =====================================================================  
+''' 
+    import cv2
+    fourcc = cv2.VideoWriter_fourcc(*'avc1')
     video = cv2.VideoWriter('output_name.avi', fourcc, float(fps), (width, height))
     for filename in frames:
         img_path = os.path.join(directory, filename)
@@ -179,7 +182,8 @@ def create_animation(turns, output_filename='rubiks_animation.avi', fps=1):
     # Optional: Clean up temporary files
     for filename in frames:
         os.remove(filename)
-
+'''
+# =====================================================================
 def generate_initial_points():
     """Generate initial intersection points and colors."""
     intersections = []
