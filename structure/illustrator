@@ -1,0 +1,267 @@
+# -*- coding: utf-8 -*-
+# =====================================================================
+"""
+Rubik's Cube Venn Diagram Move Simulation
+"""
+# =====================================================================
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Circle
+import copy
+import structure
+# =====================================================================
+
+# Colors for the Rubik's cube faces
+face_colors = {
+    'orange': '#FFA500',  # Up (U)
+    'red': '#FF0000',     # Down (D)
+    'green': '#00FF00',   # Left (L)
+    'blue': '#0000FF',    # Right (R)
+    'white': '#FFFFFF',   # Front (F)
+    'yellow': '#FFFF00'   # Back (B)
+}
+
+# Define opposite colors for each face
+opposite_colors = {
+    'orange': 'red',    # Top opposite bottom
+    'green': 'blue',    # Left opposite right
+    'white': 'yellow'   # Front opposite back
+}
+
+# Cube configuration
+side_length = 4.
+
+centers = []
+     # Top center
+    # Bottom left
+      # Bottom right
+
+r = np.sqrt(3)/6   
+centers = [(0,2.5),(-2,-2*r),(2,-2*r)]
+# Circle radii
+circle_radii = [2.4, 2.8, 3.2]
+
+width = 638
+height = 638
+fps = 1
+directory= "C://Users//HP//Downloads//"
+
+def get_circle_intersections(center1, center2, radius1, radius2):
+    """Find the intersection points of two circles."""
+    x1, y1 = center1
+    x2, y2 = center2
+    
+    # Distance between centers
+    d = np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+    
+    # Circles intersect at two points
+    a = (radius1**2 - radius2**2 + d**2) / (2 * d)
+    h = np.sqrt(radius1**2 - a**2)
+    
+    x3 = x1 + a * (x2 - x1) / d
+    y3 = y1 + a * (y2 - y1) / d
+    
+    x4_1 = x3 + h * (y2 - y1) / d
+    y4_1 = y3 - h * (x2 - x1) / d
+    
+    x4_2 = x3 - h * (y2 - y1) / d
+    y4_2 = y3 + h * (x2 - x1) / d
+    
+    return [(x4_1, y4_1), (x4_2, y4_2)]
+
+def find_closest_point(point, point_list, tolerance=0.05):
+    """Find the index of the closest point in the list."""
+    for idx, existing_point in enumerate(point_list):
+        if np.sqrt((point[0] - existing_point[0])**2 + (point[1] - existing_point[1])**2) < tolerance:
+            return idx
+    return -1
+
+def rotate_points(points, center, angle_degrees):
+    """Rotate points around a center point by a given angle."""
+    # Convert angle to radians
+    angle = np.radians(angle_degrees)
+    
+    # Rotation matrix
+    rotation_matrix = np.array([
+        [np.cos(angle), -np.sin(angle)],
+        [np.sin(angle), np.cos(angle)]
+    ])
+    
+    # Translate points relative to center, rotate, then translate back
+    rotated_points = []
+    for point in points:
+        # Translate point relative to center
+        translated_point = (point[0] - center[0], point[1] - center[1])
+        
+        # Rotate point
+        rotated_point = np.dot(rotation_matrix, translated_point)
+        
+        # Translate back
+        final_point = (rotated_point[0] + center[0], rotated_point[1] + center[1])
+        rotated_points.append(final_point)
+    
+    return rotated_points
+
+def create_rubiks_diagram(points, colors, frame_number, subtext):
+    """Create the Rubik's Cube Venn diagram."""
+    plt.figure(figsize=(6.38, 6.38), dpi = 100)
+    ax = plt.subplot(111, aspect='equal')
+    
+    # Draw concentric circles
+    for center in centers:
+        for radius in circle_radii:
+            circle = Circle(center, radius, fill=False, color='gray', linestyle='-', linewidth=1)
+            ax.add_patch(circle)
+    
+    # Draw the intersection points as colored nodes
+    for point, color in zip(points, colors):
+        plt.plot(point[0], point[1], 'o', markersize=15, markerfacecolor=face_colors[color], markeredgecolor='black')
+        
+    ax.text(-4., -5., subtext)
+    # Set plot limits and remove axes
+    plt.xlim(-5.5, 5.5)
+    plt.ylim(-5.5, 5.5)
+    plt.axis('off')
+    plt.title("Rubik's Cube Venn Representation", fontsize=14)
+    plt.tight_layout()
+    # Save the figure to a file instead of displaying it
+    filename = f'circle_frame_{frame_number:03d}.png'
+    plt.savefig(filename, dpi=100)
+    plt.show()
+    plt.close()  # Close the figure to free memory
+    
+    return filename
+    
+
+
+def create_animation(turns, output_filename='rubiks_animation.avi', fps=1):
+    # Create temporary directory for frames
+    frames = []
+    # Generate each frame
+    n = -1 
+    for x in turns:
+        n = n +1
+        k = turns.index(turns[n]) 
+        if n == 0 :
+                print(k , turns[k], n)  
+                subtitle = 'Set #'+ str(n) + '  for algorithm x'
+                filename = create_rubiks_diagram(initial_points, initial_colors, subtitle)
+                frames.append(filename)  
+                points_after, colors_after = perform_moves(
+                    initial_points, initial_colors, 
+                    [(turns[k])])
+                subtitle = 'Set #'+ str(n+1) + '  after rotating '+ turns[1][0] + turns[1][1]
+                filename = create_rubiks_diagram(points_after, colors_after, 1)
+                frames.append(filename)  
+
+        else :
+            print( k, turns[k], n)
+            points_after, colors_after  = perform_moves(
+                                points_after, colors_after,
+                                [(turns[k])])                     
+            subtitle = 'Set #'+ str(n+1) + '  after rotating '+ turns[n][0] + turns[n][1]                    
+            filename = create_rubiks_diagram(points_after, colors_after, n+1)
+            frames.append(filename)  
+# =====================================================================  
+''' 
+    import cv2
+    fourcc = cv2.VideoWriter_fourcc(*'avc1')
+    video = cv2.VideoWriter('output_name.avi', fourcc, float(fps), (width, height))
+    for filename in frames:
+        img_path = os.path.join(directory, filename)
+        img = cv2.imread(img_path)
+        video.write(img)   
+        
+    # Create GIF from frames
+    with imageio.get_writer('output_name.gif', mode='I', fps=1) as writer:
+        for filename in frames:
+            image = imageio.imread(filename)
+            writer.append_data(image)
+    
+    # Optional: Clean up temporary files
+    for filename in frames:
+        os.remove(filename)
+'''
+# =====================================================================
+def generate_initial_points():
+    """Generate initial intersection points and colors."""
+    intersections = []
+    colors = []
+    paired_center_colors = {
+        (0, 1): 'white',   # Between top and bottom-left (yellow and blue)
+        (0, 2): 'green',   # Between top and bottom-right (yellow and red)
+        (1, 2): 'orange',  # Between bottom-left and bottom-right (blue and red)
+    }
+    # Find intersections and colors
+    for i, center1 in enumerate(centers):
+        for j, center2 in enumerate(centers):
+            if i < j:  # Avoid duplicate pairs
+                for r1_idx, radius1 in enumerate(circle_radii):
+                    for r2_idx, radius2 in enumerate(circle_radii):
+                        # Find intersections between circles from different sets
+                        points = get_circle_intersections(center1, center2, radius1, radius2)
+                        
+                        for point in points:
+                            # Check if point is already in the list (within a small tolerance)
+                            is_duplicate = False
+                            for existing_point in intersections:
+                                if np.sqrt((point[0] - existing_point[0])**2 + (point[1] - existing_point[1])**2) < 0.1:
+                                    is_duplicate = True
+                                    break
+                            
+                            if not is_duplicate:
+                                intersections.append(point)
+                               
+                                # Calculate distance from diagram center
+                                center_x, center_y = 0, 0.1 
+                                distance = np.sqrt((point[0] - center_x)**2 + (point[1] - center_y)**2)
+                                
+                                # Color assignment logic
+                                if (distance < 1.912 ):
+                                    # Inner regions - visible face colors
+                                    color = paired_center_colors.get((i, j), 'white')
+                                else:
+                                    # Outer regions - opposite colors of visible faces
+                                    visible_color = paired_center_colors.get((i, j), 'white')
+                                    color = opposite_colors.get(visible_color, visible_color)                                                          
+                                colors.append(color)
+    
+    return intersections, colors
+
+# Enhanced function to perform multiple successive moves
+def perform_moves(points, colors, moves):
+    """
+    Perform a sequence of moves starting from the given state.    
+    :param points: List of intersection points
+    :param colors: List of colors for the points
+    :param moves: List of tuples (face, direction) 
+                  where face is 'U' for up, 'R' for right, 'F' for front
+                  and direction is 'cw' or 'ccw'
+    :return: Tuple of final points and colors
+    """
+    current_points = points.copy()
+    current_colors = colors.copy()
+    
+    for face, direction in moves:
+        if face == 'U':
+            current_points, current_colors = rotate_up_face(current_points, current_colors, direction)
+        elif face == 'F':
+            current_points, current_colors = rotate_front_face(current_points, current_colors, direction)
+        elif face == 'R':
+            current_points, current_colors = rotate_right_face(current_points, current_colors, direction)
+        elif face == 'L':
+            current_points, current_colors = rotate_left_face(current_points, current_colors, direction)
+        elif face == 'B':
+            current_points, current_colors = rotate_back_face(current_points, current_colors, direction)
+        elif face == 'D':
+            current_points, current_colors = rotate_down_face(current_points, current_colors, direction)
+    
+    return current_points, current_colors
+
+initial_points, initial_colors = generate_initial_points()
+points_after_url, colors_after_url = perform_moves(
+    initial_points, initial_colors, 
+    rotations #[('R', 'cw')]*4
+    )    
+create_rubiks_diagram(points_after_url, colors_after_url, 1 ,'example')
