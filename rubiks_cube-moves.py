@@ -255,23 +255,26 @@ def perform_moves(points, colors, moves):
     
     return current_points, current_colors
 
+# Test faces 4 clockwise
+points_after_url, colors_after_url = perform_moves(
+    initial_points, initial_colors, 
+    [('U', 'cw')]*4,[('F', 'cw')]*4,[('R', 'cw')]*4,[('D', 'cw')]*4,[('B', 'cw')]*4,[('L', 'cw')]*4
+    )    
+create_rubiks_diagram(points_after_url, colors_after_url, 0, 'test no changes after 4 turns')
+
+# =====================================================================
+'''
 # Test with multiple moves on different faces
 initial_points, initial_colors = generate_initial_points()
 # Visualize initial state
-create_rubiks_diagram(initial_points, initial_colors)
-
-# Test Right face clockwise
-points_after_url, colors_after_url = perform_moves(
-    initial_points, initial_colors, 
-    [('R', 'cw')]*4
-    )    
-create_rubiks_diagram(points_after_url, colors_after_url)
-
-create_rubiks_diagram(initial_points, initial_colors)
+create_rubiks_diagram(initial_points, initial_colors,0,'start')
+# =====================================================================
+# Test one move on face Left
+initial_points, initial_colors = generate_initial_points()
+create_rubiks_diagram(initial_points, initial_colors,0, 'initial')
 points_after, colors_after = rotate_left_face(initial_points, initial_colors, 'cw')
-create_rubiks_diagram(points_after, colors_after)
-# Example usage:
-# Simple increasing radius
+create_rubiks_diagram(points_after, colors_after, 1, 'after L')
+# =====================================================================
 # Test with multiple moves on different faces
 initial_points, initial_colors = generate_initial_points()
 turns = [('U', 'cw'),
@@ -286,6 +289,6 @@ turns = [('U', 'cw'),
  ('F', 'cw'),
  ('B', 'cw'),
  ('B', 'cw')]
-
 create_animation(turns, 'checkerboard', fps=1)
-
+'''
+# =====================================================================
