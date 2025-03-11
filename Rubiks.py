@@ -7,6 +7,7 @@
 import numpy
 import os
 import sys,getopt
+import structure
 
 # =====================================================================
 
