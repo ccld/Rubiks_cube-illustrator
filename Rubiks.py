@@ -32,7 +32,7 @@ def Rubiks(argv):
         elif o in ("-v", "--verbose"):
             vb = True
         elif o in ("-p","--parameters"):
-            pars = True
+            pars = a
             print ('create video file')
             return
         else:
@@ -50,7 +50,9 @@ def Rubiks(argv):
     else:
         print ('Error') # will print something like "option -a not recognized"
         return
-
+    algorithm = pars
+    print(algorithm)
+    
     # Implement the animation
     rotations = parse_move_notation(algorithm)
     print(rotations)
@@ -97,7 +99,7 @@ def parse_move_notation(notation_string):
 
 # ======================================================================
 if __name__ == '__main__':
-    Rubiks(sys.argv[:])
+    Rubiks(sys.argv[1:])
 
 # ======================================================================
     
