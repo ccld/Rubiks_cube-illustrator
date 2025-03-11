@@ -95,12 +95,12 @@ def Rubiks(argv):
     rotations = parse_move_notation(algorithm)
     print(rotations)
     structure.illustrator(rotations)                 
-
+return
 # ======================================================================
 
 
 if __name__ == '__main__':
-    Rubiks(sys.argv[1:])
+    Rubiks(sys.argv[:])
 
 # ======================================================================
     
