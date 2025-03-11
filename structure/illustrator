@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python
 # =====================================================================
 """
 Rubik's Cube Venn Diagram Move Simulation
