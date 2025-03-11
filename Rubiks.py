@@ -47,7 +47,7 @@ def Rubiks(argv):
     print (len(args))
 
     if len(args) == 1:
-        algorithm = args[0]
+        algorithm = args[:]
 
     else:
         print ('Error') # will print something like "option -a not recognized"
