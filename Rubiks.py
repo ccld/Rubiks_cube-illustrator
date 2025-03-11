@@ -55,7 +55,7 @@ def Rubiks(argv):
     rotations = parse_move_notation(algorithm)
     print(rotations)
     structure.illustrator(rotations)                 
-return
+    return
 
 def parse_move_notation(notation_string):
     """
@@ -93,7 +93,7 @@ def parse_move_notation(notation_string):
         for _ in range(repetitions):
             moves.append((face, direction))
     
-return moves
+    return moves
 
 # ======================================================================
 if __name__ == '__main__':
