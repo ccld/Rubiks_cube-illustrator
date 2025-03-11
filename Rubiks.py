@@ -11,6 +11,7 @@ import structure
 
 # =====================================================================
 
+
 def Rubiks(argv):
     # -------------------------------------------------------------------
     try:
@@ -50,7 +51,13 @@ def Rubiks(argv):
         print ('Error') # will print something like "option -a not recognized"
         return
 
-    def parse_move_notation(notation_string):
+    # Implement the animation
+    rotations = parse_move_notation(algorithm)
+    print(rotations)
+    structure.illustrator(rotations)                 
+return
+
+def parse_move_notation(notation_string):
         """
         Parse a move notation string into a list of (face, direction) tuples for perform_moves.
         
@@ -60,10 +67,10 @@ def Rubiks(argv):
                                 - Numbers after a letter repeat that move that many times
         :return: List of (face, direction) tuples
         """
-        moves = []
-        i = 0
+       moves = []
+       i = 0
         
-        while i < len(notation_string):
+       while i < len(notation_string):
             # Get the current character (face)
             char = notation_string[i]
             i += 1
@@ -88,14 +95,7 @@ def Rubiks(argv):
         
         return moves
 
-    # Implement the animation
-    rotations = parse_move_notation(algorithm)
-    print(rotations)
-    structure.illustrator(rotations)                 
-return
 # ======================================================================
-
-
 if __name__ == '__main__':
     Rubiks(sys.argv[:])
 
