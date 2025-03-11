@@ -13,7 +13,6 @@ import structure
 
 def Rubiks(argv):
     # -------------------------------------------------------------------
-
     try:
         opts, args = getopt.getopt(argv, "hvp:",\
         ["help","verbose","pars"])
@@ -25,8 +24,6 @@ def Rubiks(argv):
     pars = False
     
     # -------------------------------------------------------------------
-
-
     for o,a in opts:
         if o in ("-h", "--help"):
             print ('help')
@@ -39,7 +36,7 @@ def Rubiks(argv):
             return
         else:
             assert False, "Unhandled option"
-    
+  
         return
 
     # Check for datafiles in array args:
