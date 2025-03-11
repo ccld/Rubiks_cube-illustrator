@@ -125,10 +125,10 @@ def create_rubiks_diagram(points, colors, frame_number, subtext):
     plt.axis('off')
     plt.title("Rubik's Cube Venn Representation", fontsize=14)
     plt.tight_layout()
-    plt.show()
     # Save the figure to a file instead of displaying it
     filename = f'circle_frame_{frame_number:03d}.png'
     plt.savefig(filename, dpi=100)
+    plt.show()
     plt.close()  # Close the figure to free memory
     
     return filename
