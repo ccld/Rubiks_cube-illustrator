@@ -325,6 +325,13 @@ def perform_moves(points, colors, moves):
                 new_colors[orig_group[j]] = colors[new_group[j]]
         return points, new_colors
 
+
+# =====================================================================
+# Test with multiple moves on different faces
+initial_points, initial_colors = generate_initial_points()
+# Visualize initial state
+create_rubiks_diagram(initial_points, initial_colors,0,'start')
+
 # Test faces 4 clockwise
 points_after_url, colors_after_url = perform_moves(
     initial_points, initial_colors, 
@@ -334,11 +341,6 @@ create_rubiks_diagram(points_after_url, colors_after_url, 0, 'test no changes af
 
 # =====================================================================
 '''
-# Test with multiple moves on different faces
-initial_points, initial_colors = generate_initial_points()
-# Visualize initial state
-create_rubiks_diagram(initial_points, initial_colors,0,'start')
-# =====================================================================
 # Test one move on face Left
 initial_points, initial_colors = generate_initial_points()
 create_rubiks_diagram(initial_points, initial_colors,0, 'initial')
