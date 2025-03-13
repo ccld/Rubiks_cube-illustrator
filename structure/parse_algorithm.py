@@ -32,12 +32,12 @@ def parse_move_notation(notation_string):
         if char.isupper():
             face = char
             direction = 'cw'  # Uppercase is clockwise
-        else:
-            face = char.upper()
-            direction = 'ccw'  # Lowercase is counterclockwise
-        
-        # Check if the next character is a number (repetition)
+            
+        # Check if the next character is a lower char or a number (repetition)
         repetitions = 1
+        if i < len(notation_string) and notation_string[i].islower():
+            direction = 'ccw'  # Lowercase is counterclockwise
+            i += 1
         if i < len(notation_string) and notation_string[i].isdigit():
             repetitions = int(notation_string[i])
             i += 1
@@ -45,5 +45,5 @@ def parse_move_notation(notation_string):
         # Add the move(s) to the list
         for _ in range(repetitions):
             moves.append((face, direction))
-    
+    print(moves)
     return moves
