@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 import copy
-import structure
+# import structure
 # =====================================================================
 
 # Colors for the Rubik's cube faces
