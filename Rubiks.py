@@ -33,16 +33,13 @@ def main():
     
     print(f"Output file: {args.output}")
 
-    process_image(args)
+    process_actions(args)
 
-def process_image(args):
+def process_actions(args):
     rotations = parse_move_notation(args.parameters)
-    print("Processing image...")
-    # Placeholder for your actual implementation
-    print(rotations)
-    
+    print(rotations)    
     process= cubeprocess(rotations)
-    print(f"Image processed and saved to {args.output}")
+    print(f"Actions processed and saved to {args.output}")
      
 def parse_move_notation(notation_string):
     moves = []
