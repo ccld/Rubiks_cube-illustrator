@@ -1,7 +1,7 @@
 # Rubiks_cube-illustrator
 A mathematical visualization tool that represents a Rubik's Cube using overlapping Venn diagrams, allowing for intuitive tracking of cube state during move sequences.
 
-![Rubik's Cube Checkboard pattern](https://github.com/ccld/Rubiks_cube-illustrator/blob/main/Figure_2025-03-08png)
+![Rubik's Cube Checkboard pattern](https://github.com/ccld/Rubiks_cube-illustrator/blob/main/Figure_2025-03-08.png) 
 
 ## Overview
 
