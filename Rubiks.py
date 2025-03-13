@@ -2,104 +2,76 @@
 #!/usr/bin/env python
 # =====================================================================
 
-# Globally useful modules:
-
-import numpy
-import os
-import sys,getopt
-import structure
-
+import argparse
+import sys
 # =====================================================================
-
-
-def Rubiks(argv):
-    # -------------------------------------------------------------------
-    try:
-        opts, args = getopt.getopt(argv, "hvp:",\
-        ["help","verbose","pars"])
-    except (getopt.GetoptError):
-        print ('Error') # will print something like "option -a not recognized"
-        return
-    
-    vb = False  
-    pars = False
-    
-    # -------------------------------------------------------------------
-    for o,a in opts:
-        if o in ("-h", "--help"):
-            print ('help')
-            return
-        elif o in ("-v", "--verbose"):
-            vb = True
-        elif o in ("-p","--parameters"):
-            pars = a
-            print ('create video file')
-            return
-        else:
-            assert False, "Unhandled option"
-  
-        return
-
-    # Check for datafiles in array args:
-
-    print (len(args))
-
-    if len(args) == 1:
-        algorithm = args[:]
-
+def main():
+    # Create the parser
+    parser = argparse.ArgumentParser(description='Illustrator tool')    
+    # Add arguments
+    parser.add_argument('-o', '--output', type=str, 
+                        help='video output file path')
+    parser.add_argument('-p', '--parameters', type=str, required=True, 
+                        help='actions code')
+    parser.add_argument('-c', '--clean', type=str, default='False',
+                    help='remove files (True/False)')
+        
+    args = parser.parse_args()
+   
+    clean_flag = args.clean.lower() == 'true'
+    if clean_flag:
+        print("delete files enabled")
     else:
-        print ('Error') # will print something like "option -a not recognized"
-        return
-    algorithm = pars
-    print(algorithm)
+        print("delete files disabled")
     
-    # Implement the animation
-    rotations = parse_move_notation(algorithm)
-    print(rotations)
-    structure.illustrator(rotations)                 
-    return
+    if args.output is not None:
+        print(f"video: {args.output}")
+    
+    if args.parameters:
+        params = args.parameters #[float(x) for x in args.parameters.split(',')]
+        print(f"Parameters: {params}")  
+    
+    print(f"Output file: {args.output}")
 
+    process_image(args)
+
+def process_image(args):
+    rotations = parse_move_notation(args.parameters)
+    print("Processing image...")
+    # Placeholder for your actual implementation
+    print(rotations)
+    
+    process= cubeprocess(rotations)
+    print(f"Image processed and saved to {args.output}")
+     
 def parse_move_notation(notation_string):
-    """
-    Parse a move notation string into a list of (face, direction) tuples for perform_moves.
-        
-    :param notation_string: String like 'FLRU2Lr' where:
-                  - Uppercase letters are clockwise rotations
-                  - Lowercase letters are counterclockwise rotations
-                  - Numbers after a letter repeat that move that many times
-        :return: List of (face, direction) tuples
-    """
     moves = []
-    i = 0
-        
+    i = 0    
     while i < len(notation_string):
-        # Get the current character (face)
         char = notation_string[i]
         i += 1
-      
+             
         # Determine the face and direction
         if char.isupper():
             face = char
-            direction = 'cw'  # Uppercase is clockwise
-        else:
-            face = char.upper()
-            direction = 'ccw'  # Lowercase is counterclockwise
-        
+            direction = 'cw'
         # Check if the next character is a number (repetition)
         repetitions = 1
+
+        if i < len(notation_string) and notation_string[i].islower():
+            direction = 'ccw'  # Lowercase is counterclockwise
+            i += 1
         if i < len(notation_string) and notation_string[i].isdigit():
             repetitions = int(notation_string[i])
             i += 1
-        
         # Add the move(s) to the list
         for _ in range(repetitions):
             moves.append((face, direction))
-    
+    print(moves)
     return moves
 
-# ======================================================================
+# =====================================================================
 if __name__ == '__main__':
-    Rubiks(sys.argv[1:])
-
+    main()
 # ======================================================================
     
