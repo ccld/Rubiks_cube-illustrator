@@ -165,7 +165,7 @@ def create_animation(turns, output_filename='rubiks_animation.avi', fps=1):
             filename = create_rubiks_diagram(points_after, colors_after, n+1)
             frames.append(filename)  
 # =====================================================================  
-''' 
+
     import cv2
     fourcc = cv2.VideoWriter_fourcc(*'avc1')
     video = cv2.VideoWriter('output_name.avi', fourcc, float(fps), (width, height))
@@ -173,17 +173,17 @@ def create_animation(turns, output_filename='rubiks_animation.avi', fps=1):
         img_path = os.path.join(directory, filename)
         img = cv2.imread(img_path)
         video.write(img)   
-        
+ '''        
     # Create GIF from frames
     with imageio.get_writer('output_name.gif', mode='I', fps=1) as writer:
         for filename in frames:
             image = imageio.imread(filename)
             writer.append_data(image)
-    
+'''    
     # Optional: Clean up temporary files
     for filename in frames:
         os.remove(filename)
-'''
+
 # =====================================================================
 def generate_initial_points():
     """Generate initial intersection points and colors."""
