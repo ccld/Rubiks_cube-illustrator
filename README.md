@@ -10,7 +10,7 @@ This project offers a novel way to visualize and simulate Rubik's Cube movements
 ### Key Features
 
 - **Intuitive Venn Diagram Visualization**: Represents the Rubik's Cube state using overlapping circles and colored nodes
-- **Move Simulation**: Accurately simulates standard Rubik's Cube rotations (U, F, R, L, D, B faces)
+- **Move Simulation**: Accurately simulates standard Rubik's Cube rotations (U, F, R, L, D, B faces, and M, E, S middle slices)
 - **Sequence Execution**: Supports execution of multiple moves in sequence
 - **Clockwise and Counterclockwise Rotations**: Implements standard cube notation for both CW and CCW moves
 
@@ -27,14 +27,14 @@ The representation uses three overlapping circles with concentric rings to creat
 The visualization is built with Python using matplotlib for rendering. Key components include:
 
 - Circle intersection calculation algorithms
-- Rotation logic for each of the six faces
+- Rotation logic for each of the six faces and of the three middle slices
 - Color management and tracking
 - Move sequencing and execution
 
 ## Usage
 
 ```python
-# Generate the initial state
+# Generate the initial state with red face as Down on the mat and green face as Front at the left of diagram
 initial_points, initial_colors = generate_initial_points()
 
 # Visualize the initial state
