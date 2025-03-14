@@ -25,9 +25,9 @@ face_colors = {
 
 # Define opposite colors for each face
 opposite_colors = {
-    'orange': 'red',    # Top opposite bottom
-    'green': 'blue',    # Left opposite right
-    'white': 'yellow'   # Front opposite back
+    'orange': 'red',    # Top opposite bottom # 'red' : 'orange',  if Up face white
+    'green': 'blue',    # Left opposite right # 'blue' : 'green' , 
+    'white': 'yellow'   # Front opposite back # 'white' : 'yellow' 
 }
 
 # Cube configuration
@@ -190,9 +190,9 @@ def generate_initial_points():
     intersections = []
     colors = []
     paired_center_colors = {
-        (0, 1): 'white',   # Between top and bottom-left (yellow and blue)
-        (0, 2): 'green',   # Between top and bottom-right (yellow and red)
-        (1, 2): 'orange',  # Between bottom-left and bottom-right (blue and red)
+        (0, 1): 'white',   # Between top and bottom-left (yellow and blue) # 'blue' if white face Up
+        (0, 2): 'green',   # Between top and bottom-right (yellow and red) # 'red'
+        (1, 2): 'orange',  # Between bottom-left and bottom-right (blue and red) # 'white'
     }
     # Find intersections and colors
     for i, center1 in enumerate(centers):
@@ -246,18 +246,24 @@ def perform_moves(points, colors, moves):
     
     for face, direction in moves:
         if face == 'U':
-            current_points, current_colors = rotate_up_face(current_points, current_colors, direction)
+            current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[0],radius=circle_radii[0])
         elif face == 'F':
-            current_points, current_colors = rotate_front_face(current_points, current_colors, direction)
+            current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[1],radius=circle_radii[0])
         elif face == 'R':
-            current_points, current_colors = rotate_right_face(current_points, current_colors, direction)
+            current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[2],radius=circle_radii[0])
         elif face == 'L':
-            current_points, current_colors = rotate_left_face(current_points, current_colors, direction)
+            current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[2],radius=circle_radii[2])
         elif face == 'B':
-            current_points, current_colors = rotate_back_face(current_points, current_colors, direction)
+            current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[1],radius=circle_radii[2])
         elif face == 'D':
-            current_points, current_colors = rotate_down_face(current_points, current_colors, direction)
-    
+            current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[0],radius=circle_radii[2])
+        elif face == 'M':
+            current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[2],radius=circle_radii[1])
+        elif face == 'S':
+            current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[1],radius=circle_radii[1])
+        elif face == 'E':
+            current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[0],radius=circle_radii[1])
+
     return current_points, current_colors
 
 initial_points, initial_colors = generate_initial_points()
