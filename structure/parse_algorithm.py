@@ -22,28 +22,35 @@ def parse_move_notation(notation_string):
     """
     moves = []
     i = 0
-    
+    char_cw=['U','F','R','L','B','D','S']
+    char_acw = ['E','M']
     while i < len(notation_string):
         # Get the current character (face)
         char = notation_string[i]
         i += 1
         
         # Determine the face and direction
-        if char.isupper():
+        if char.isupper() and char in char_cw:
             face = char
-            direction = 'cw'  # Uppercase is clockwise
-            
-        # Check if the next character is a lower char or a number (repetition)
+            direction = 'cw'; 
+        elif char.isupper() and char in char_acw:
+            face = char
+            direction = 'ccw';
+        else: sys.exit(f'Unknown slice move {char}')
+                # Check if the next character is a number (repetition)
         repetitions = 1
-        if i < len(notation_string) and notation_string[i].islower():
-            direction = 'ccw'  # Lowercase is counterclockwise
+
+        if i < len(notation_string) and notation_string[i]== 'r':
+            if notation_string[i-1] in char_cw: direction = 'ccw' 
+            else: direction = 'cw'
             i += 1
+
         if i < len(notation_string) and notation_string[i].isdigit():
             repetitions = int(notation_string[i])
             i += 1
-        
         # Add the move(s) to the list
         for _ in range(repetitions):
             moves.append((face, direction))
+    
     print(moves)
     return moves
