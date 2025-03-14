@@ -34,7 +34,7 @@ The visualization is built with Python using matplotlib for rendering. Key compo
 ## Usage
 
 ```python
-# Generate the initial state with red face as Down on the mat and green face as Front at the left of diagram
+# Generate the initial state with red face as Down at bottom of diagram and green face as Front at the left of diagram
 initial_points, initial_colors = generate_initial_points()
 
 # Visualize the initial state
