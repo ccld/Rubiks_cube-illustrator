@@ -242,24 +242,7 @@ def perform_moves(points, colors, moves):
     """
     current_points = points.copy()
     current_colors = colors.copy()
-    '''
-    for face, direction in moves:
-        if face == 'U':
-            current_points, current_colors = rotate_up_face(current_points, current_colors, direction)
-        elif face == 'F':
-            current_points, current_colors = rotate_front_face(current_points, current_colors, direction)
-        elif face == 'R':
-            current_points, current_colors = rotate_right_face(current_points, current_colors, direction)
-        elif face == 'L':
-            current_points, current_colors = rotate_left_face(current_points, current_colors, direction)
-        elif face == 'B':
-            current_points, current_colors = rotate_back_face(current_points, current_colors, direction)
-        elif face == 'D':
-            current_points, current_colors = rotate_down_face(current_points, current_colors, direction)
-           
-    return current_points, current_colors
-    '''
-    
+   
     for face, direction in moves:
             if face == 'U':
                 current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[0],radius=circle_radii[0])
@@ -273,7 +256,14 @@ def perform_moves(points, colors, moves):
                 current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[1],radius=circle_radii[2])
             elif face == 'D':
                 current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[0],radius=circle_radii[2])
-        return current_points, current_colors
+            elif face == 'M':
+                current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[2],radius=circle_radii[1])
+            elif face == 'S':
+                current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[1],radius=circle_radii[1])
+            elif face == 'E':
+                current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[0],radius=circle_radii[1])
+
+    return current_points, current_colors
     
     def rotate_face(points, colors, direction, center ,radius):
         
