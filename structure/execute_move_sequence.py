@@ -13,9 +13,12 @@ def execute_move_sequence(points, colors, notation_string):
     return perform_moves(points, colors, moves)
 
 # =====================================================================
+
+initial_points, initial_colors = generate_initial_points()
+create_animation(turns, 'checker.mp4', fps=1)
+
 """
 # Example usage:
-initial_points, initial_colors = generate_initial_points()
 # Execute the move sequence 'FLRU2Lr'
 final_points, final_colors = execute_move_sequence(initial_points, initial_colors, 'FLRU2Lr')
 create_rubiks_diagram(final_points, final_colors)
