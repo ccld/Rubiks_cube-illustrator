@@ -33,6 +33,9 @@ The visualization is built with Python using matplotlib for rendering. Key compo
 
 ## Usage
 
+Using the command line, we define the colors of the UP and FRONT sides of the Rubik's Cube when it is placed on the play mat.
+We also enter the sequence of moves to be performed.
+
 ```python
 # Generate the initial state with red face as Down at bottom of diagram and green face as Front at the left of diagram
 initial_points, initial_colors = generate_initial_points()
