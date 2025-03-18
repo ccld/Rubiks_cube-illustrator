@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# =====================================================================
+
 import numpy as np
 
 def initialize_cube(orientation_code='02'):
