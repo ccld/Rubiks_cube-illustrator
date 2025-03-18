@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 # =====================================================================
-# Makes the sketch directory a Python package
-# This allows importing from sketch modules
+# Makes the strusture directory a Python package
+# This allows importing from structure modules
 # =====================================================================
 from parse_algorithm import *
 from moves import *
