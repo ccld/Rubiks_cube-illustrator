@@ -1,5 +1,5 @@
 rubiks_cube-illustator project/
-├── Rubiks.py              # Main entry point with parser
+├── Rubiks_illustrator.py              # Main entry point with parser
 ├── structure/             # Branch for cube structure
 │   ├── __init__.py        # Makes structure a package
 │   ├── framesetup.py      # Cube frame setup
