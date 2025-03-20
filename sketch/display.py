@@ -4,6 +4,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.patches import Circle
 from mpl_toolkits.mplot3d import Axes3D
 
 def get_color_map():
@@ -103,3 +104,54 @@ def get_color_name(color_index):
         5: "Red"
     }
     return colors.get(color_index, "Unknown")
+
+def create_rubiks_diagram(points, colors, frame_number, subtext):
+    r = np.sqrt(3)/6  
+    centers = []
+        # Top center
+        # Bottom left
+        # Bottom right       
+    centers = [(0,2.5),(-2,-2*r),(2,-2*r)]
+    # Circle radii
+    circle_radii = [2.4, 2.8, 3.2]
+    face_colors = {
+    'orange': '#FFA500',  # Up (U)
+    'red': '#FF0000',     # Down (D)
+    'green': '#00FF00',   # Left (L)
+    'blue': '#0000FF',    # Right (R)
+    'white': '#FFFFFF',   # Front (F)
+    'yellow': '#FFFF00'   # Back (B)
+        }
+    
+    """Create the Rubik's Cube Venn diagram."""
+    plt.figure(figsize=(6.38, 6.38), dpi = 100)
+    ax = plt.subplot(111, aspect='equal')
+    # Draw concentric circles
+    for center in centers:
+        for radius in circle_radii:
+            circle = Circle(center, radius, fill=False, color='gray', linestyle='-', linewidth=1)
+            ax.add_patch(circle)
+
+    # Draw the intersection points as colored nodes
+    for point, color in zip(points, colors):
+        plt.plot(point[0], point[1], 'o', markersize=15, markerfacecolor=face_colors[color], markeredgecolor='black')
+
+    ax.text(-4., -5., subtext)
+    ax.text(0., -3.6, 'D')
+    ax.text(0., 2.3, 'U')
+    ax.text(-3.8, 2.3, 'L')
+    ax.text(3.6,2.3, 'B')
+    ax.text(-1.74, -0.60, 'F')
+    ax.text(1.54,-0.60, 'R')
+    plt.xlim(-5.5, 5.5)
+    plt.ylim(-5.5, 5.5)
+    plt.axis('off')
+    plt.title("Rubik's Cube Venn Representation", fontsize=14)
+    plt.tight_layout()
+    # Save the figure to a file instead of displaying it
+    filename = f'circle_frame_{frame_number:03d}.png'
+    plt.savefig(filename, dpi=100)
+    plt.show()
+    plt.close()  # Close the figure to free memory
+
+    return filename
