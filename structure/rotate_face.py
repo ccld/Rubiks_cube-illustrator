@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+
+import numpy as np
+
 def rotate_face(points, colors, direction, center ,radius):
     
     # Find indices of points on the inner circle of the  face
