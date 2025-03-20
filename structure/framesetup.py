@@ -144,16 +144,27 @@ def get_circle_intersections(center1, center2, radius1, radius2):
 
     return [(x4_1, y4_1), (x4_2, y4_2)]
 
-def generate_initial_points():
+def get_constants():
     r = np.sqrt(3)/6  
     centers = []
         # Top center
         # Bottom left
         # Bottom right   
-    
     centers = [(0,2.5),(-2,-2*r),(2,-2*r)]
     # Circle radii
     circle_radii = [2.4, 2.8, 3.2]
+    # Define constants in a dictionary
+    constants = {
+        'centers': centers,
+        'circle_radii': circle_radii,
+        }
+    return constants
+
+    
+def generate_initial_points():
+    consts = get_constants()
+    centers = consts['centers']
+    circle_radii= consts['circle_radii']
     """Generate initial intersection points and colors."""
     intersections = []
     colors = []
