@@ -1,13 +1,12 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/env python
 """
 Script that allows for face rotations
-
 The rotation follows the color progression:
 Clockwise: white → green → yellow → blue → white
 Counterclockwise: white → blue → yellow → green → white
-
-
 """
+# =====================================================================
 import numpy as np
 # =====================================================================
 # function to handle UP face rotation
