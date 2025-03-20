@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 import sys, getopt
 
-from structure import framesetup
-from structure.framesetup import *
-from structure import moves
-from structure.moves import *
-from sketch.display import *
+from structure import *
+from sketch import display
 
 def Rubiks(argv):
     """Parse Rubik's Cube notation into a list of moves."""
@@ -91,13 +88,14 @@ def main(argv):
         else:
             assert False, "Unhandled option"
     
-    print(f"Parsed orientation: {up}")   
+    print(f"Parsed orientation: {faceUhue}")   
     moves_list = Rubiks(turns)
     print(f"Parsed {len(moves_list)} moves: {moves_list}")
     # Initialize the cube
-    cube = initialize_cube()   
-    display_cube(cube, up)
-    result_cube = excute_moves(cube, moves_list)
+    framesetup.initialize_cube(orientation_code= faceUhue) 
+    initial_points, initial_colors = framesetup.generate_initial_points()
+    display.create_rubiks_diagram(initial_points, initial_colors,0,'start')
+
     return 
 
 if __name__ == "__main__":
