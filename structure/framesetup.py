@@ -21,6 +21,34 @@ def initialize_cube(orientation_code='02'):
     - Each face is 3x3
     - Colors are represented by integers 0-5
     """
+        # Create a solved cube where each face has a unique color/number
+
+    # Colors for the Rubik's cube faces
+    face_colors = {
+    'orange': '#FFA500',  # Up (U)
+    'red': '#FF0000',     # Down (D)
+    'green': '#00FF00',   # Left (L)
+    'blue': '#0000FF',    # Right (R)
+    'white': '#FFFFFF',   # Front (F)
+    'yellow': '#FFFF00'   # Back (B)
+    }
+
+    # Define opposite colors for each face
+    opposite_colors = {
+    'orange': 'red',    # standard Rubiks convention
+    'green': 'blue',    # 
+    'white': 'yellow', 
+    'red': 'orange',
+    'blue': 'green',
+    'yellow':'white',
+    'Unknown':'Unknown'
+    }
+
+    # Cube configuration
+    side_length = 4.
+    width = 638
+    height = 638
+
     # Create a solved cube where each face has a unique color/number
     cube = np.zeros((6, 3, 3), dtype=int)
     
@@ -93,5 +121,96 @@ def get_color_name(color_index):
     }
     return colors.get(color_index, "Unknown")
 
-#orientation ='42'
-#initialize_cube(orientation)
+def get_circle_intersections(center1, center2, radius1, radius2):
+    """Find the intersection points of two circles."""
+    x1, y1 = center1
+    x2, y2 = center2
+
+    # Distance between centers
+    d = np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+    # Circles intersect at two points
+    a = (radius1**2 - radius2**2 + d**2) / (2 * d)
+    h = np.sqrt(radius1**2 - a**2)
+
+    x3 = x1 + a * (x2 - x1) / d
+    y3 = y1 + a * (y2 - y1) / d
+
+    x4_1 = x3 + h * (y2 - y1) / d
+    y4_1 = y3 - h * (x2 - x1) / d
+
+    x4_2 = x3 - h * (y2 - y1) / d
+    y4_2 = y3 + h * (x2 - x1) / d
+
+    return [(x4_1, y4_1), (x4_2, y4_2)]
+
+def generate_initial_points():
+    r = np.sqrt(3)/6  
+    centers = []
+        # Top center
+        # Bottom left
+        # Bottom right   
+    
+    centers = [(0,2.5),(-2,-2*r),(2,-2*r)]
+    # Circle radii
+    circle_radii = [2.4, 2.8, 3.2]
+    """Generate initial intersection points and colors."""
+    intersections = []
+    colors = []
+    paired_center_colors = {
+        (0, 1): 'white',   # Face RIGHT
+        (0, 2): 'green',   # face FRONT 
+        (1, 2): 'orange',  # face UP
+    }
+    
+    paired_center_colors = {
+        (0, 1): 5,   # Face RIGHT
+        (0, 2): 2,   # face FRONT 
+        (1, 2): 0  # face UP
+    }
+    
+    # Find intersections and colors
+    for i, center1 in enumerate(centers):
+        for j, center2 in enumerate(centers):
+            if i < j:  # Avoid duplicate pairs
+                for r1_idx, radius1 in enumerate(circle_radii):
+                    for r2_idx, radius2 in enumerate(circle_radii):
+                        # Find intersections between circles from different sets
+                        points = get_circle_intersections(center1, center2, radius1, radius2)
+
+                        for point in points:
+                            # Check if point is already in the list (within a small tolerance)
+                            is_duplicate = False
+                            for existing_point in intersections:
+                                if np.sqrt((point[0] - existing_point[0])**2 + (point[1] - existing_point[1])**2) < 0.1:
+                                    is_duplicate = True
+                                    break
+
+                            if not is_duplicate:
+                                intersections.append(point)
+
+                                # Calculate distance from diagram center
+                                center_x, center_y = 0, 0.1 
+                                distance = np.sqrt((point[0] - center_x)**2 + (point[1] - center_y)**2)
+
+                                # Color assignment logic
+                                if (distance < 1.912 ):
+                                    # face (U/ D/ ...) ; face cube color
+                                    a = paired_center_colors[(i,j)]
+                                    color = get_color_name(a)
+                                    colors.append(color)
+                                    #color = 'white' #face_colors[a]
+                                    
+                                    # Inner regions - visible face colors
+                                    # color = paired_center_colors.get((i, j), 'white')
+                                else:
+                                    # Outer regions - opposite colors of visible faces
+                                    b = paired_center_colors[(i,j)]                        
+                                    c =get_opposite_color(b)
+                                    color = get_color_name(c)
+                                    colors.append(color)
+                                    # face / cube color
+                                    #visible_color = paired_center_colors.get((i, j), 'white')
+                                    #color = opposite_colors.get(visible_color, visible_color)                                                          
+    
+    return intersections, colors
