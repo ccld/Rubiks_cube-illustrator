@@ -33,8 +33,10 @@ The visualization is built with Python using matplotlib for rendering. Key compo
 
 ## Usage
 
-Using the command line, we define the colors of the UP and FRONT sides of the Rubik's Cube when it is placed on the play mat.
-We also enter the sequence of moves to be performed.
+The main executable script is Rubiks.py. It takes in a string parameter of the 3 codes colors of the chosen corner as perspective view of the cube, and optional parameters
+-	a string of the sequence of twists to be performed. 
+-	a cleaning flag for deleting all intermediate png file produced by the successive twists of the cube
+-	an output mp4 flag for an animated output of all the diagrams produced produced by the successive twists
 
 ```python
 # Generate the initial state with red face as Down at bottom of diagram and green face as Front at the left of diagram
