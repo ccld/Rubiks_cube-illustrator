@@ -33,17 +33,6 @@ def initialize_cube(orientation_code='02'):
     'yellow': '#FFFF00'   # Back (B)
     }
 
-    # Define opposite colors for each face
-    opposite_colors = {
-    'orange': 'red',    # standard Rubiks convention
-    'green': 'blue',    # 
-    'white': 'yellow', 
-    'red': 'orange',
-    'blue': 'green',
-    'yellow':'white',
-    'Unknown':'Unknown'
-    }
-
     # Cube configuration
     side_length = 4.
     width = 638
@@ -168,17 +157,6 @@ def generate_initial_points():
     """Generate initial intersection points and colors."""
     intersections = []
     colors = []
-    paired_center_colors = {
-        (0, 1): 'white',   # Face RIGHT
-        (0, 2): 'green',   # face FRONT 
-        (1, 2): 'orange',  # face UP
-    }
-    
-    paired_center_colors = {
-        (0, 1): 5,   # Face RIGHT
-        (0, 2): 2,   # face FRONT 
-        (1, 2): 0  # face UP
-    }
     
     # Find intersections and colors
     for i, center1 in enumerate(centers):
