@@ -4,15 +4,15 @@ import sys, getopt
 from structure import *
 from sketch import display
 
-def Rubiks(argv):
+def Rubiks(twists):
     """Parse Rubik's Cube notation into a list of moves."""
     # Check if argv is a list or a string
-    if isinstance(argv, list):
+    if isinstance(twists, list):
         # If it's a list (like from sys.argv), join it
         notation_string = ''.join(argv)
     else:
         # If it's already a string
-        notation_string = argv
+        notation_string = twists
         
     moves = []
     i = 0
@@ -53,52 +53,49 @@ def Rubiks(argv):
     return moves
 
 def main(argv):
-    up ='42'
-    # Check if argv is a list or a string
-    if isinstance(argv, list):
-        # If it's a list (like from sys.argv), join it
-        notation_string = ''.join(argv)
-    else:
-        # If it's already a string
-        notation_string = argv
+    up = None
+    turns = ''
     
-    try:
-        args = notation_string.split()
-        turns = args[0]
-        args = args[1:]        
-    except getopt.GetoptError as err:
-        # print help information and exit:
-        print(str(err)) # will print something like "option -a not recognized"
-    
-    algo= Rubiks(turns)
-    vb = False
-    # Defaults 
-    outfile = False
-    
-    optlist, args = getopt.getopt(args, "vx:co")
+    optlist, args = getopt.getopt(argv, "vx:t:co")
+
     for o, a in optlist:
-        if o in ("-v", "--verbose"):
-            vb = True
-        elif o in ("-x", "--upfront"):
-            up = a               
-        elif o in ("-c", "--clean"):
-            cleaner = True
-        elif o in ("-o", "--output"):
-            outfile = True
-        else:
-            assert False, "Unhandled option"
+      if o in ("-v", "--verbose"):
+        vb = True
+      elif o in ("-x", "--upfront"):
+          up = a               
+      elif o in ("-t", "--twist"):
+          turns = a               
+      elif o in ("-c", "--clean"):
+          cleaner = True
+      elif o in ("-o", "--output"):
+          outfile = True
     
-    print(f"Parsed orientation: {faceUhue}")   
     moves_list = Rubiks(turns)
     print(f"Parsed {len(moves_list)} moves: {moves_list}")
+    print('hue', up)    
+    corner=[]
+      
     # Initialize the cube
-    framesetup.initialize_cube(orientation_code= faceUhue) 
-    initial_points, initial_colors = framesetup.generate_initial_points()
+    cube, face_colors, corner = framesetup.initialize_cube(orientation_code = up) 
+    print('corner view  =', corner)
+    initial_points, initial_colors = framesetup.generate_initial_points(corner)
     display.create_rubiks_diagram(initial_points, initial_colors,0,'start')
+    # Test faces 4 clockwise
+    points_after_url, colors_after_url = perform_moves(
+        initial_points, initial_colors, 
+        moves_list
+        ) 
+    display.create_rubiks_diagram(points_after_url, colors_after_url, n, \
+            'Group Theory')
 
     return 
 
 if __name__ == "__main__":
+    n=3 # for diagraam subtitle 
+    number=len(sys.argv)
+    print ('The Number of arguments:', number, 'arguments.')
+    print ('Argument List:', sys.argv[1:])        
     main(sys.argv[1:])
+
 
 
