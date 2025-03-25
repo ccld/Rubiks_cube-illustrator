@@ -33,53 +33,57 @@ def initialize_cube(orientation_code='02'):
     'yellow': '#FFFF00'   # Back (B)
     }
 
-    # Cube configuration
-    side_length = 4.
-    width = 638
-    height = 638
+    corner_colors= [
+         'BWO',
+         'BYR',
+         'GRY',
+         'GWR',
+         'GYO',
+         'OGY',
+         'OWG',
+         'OYB',
+         'RBY',
+         'RGW',
+         'RWB',
+         'RYG',
+         'WGO',
+         'WOB',
+         'WRG',
+         'YGR',
+         'YRB',
+         'YRB'
+         ]
+
+    fur= orientation_code
+    
+    if fur in corner_colors: 
+        front_color = get_color_center(fur[0])
+        up_color = get_color_center(fur[1])
+        right_color = get_color_center(fur[2])
+        
+        down_color = get_opposite_color(up_color)
+        left_color = get_opposite_color(right_color)
+        back_color = get_opposite_color(front_color)
+        print (f"UP: {get_color_name(up_color)}; RIGHT: {get_color_name(right_color)}; FRONT: {get_color_name(front_color)}")
+        print (f"DOWN: {get_color_name(down_color)}; BACK: {get_color_name(back_color)}; LEFT: {get_color_name(left_color)}")
+
+    else: 
+        print(f'unknown corner: {fur}')
+        sys.exit()
 
     # Create a solved cube where each face has a unique color/number
     cube = np.zeros((6, 3, 3), dtype=int)
     
-    if orientation_code is None:
-        # Default orientation: each face index equals its color
-        for i in range(6):
-            cube[i, :, :] = i
-    else:
-        # Custom orientation based on orientation_code
-        # Parse the orientation code
-        up_color = int(orientation_code[0])
-        front_color = int(orientation_code[1])
-        
-        # Validate the input colors
-        if up_color == front_color or not (0 <= up_color < 6 and 0 <= front_color < 6):
-            raise ValueError("Invalid orientation code. Colors must be different and between 0-5.")
-        
-        # Determine the remaining faces based on standard Rubik's cube structure
-        # The opposite of UP is DOWN, opposite of FRONT is BACK, etc.
-        down_color = get_opposite_color(up_color)
-        back_color = get_opposite_color(front_color)
-        
-        # Determine LEFT and RIGHT colors
-        # This is a bit complex due to Rubik's cube constraints
-        remaining_colors = set(range(6)) - {up_color, down_color, front_color, back_color}
-        remaining_colors = list(remaining_colors)
-        
-        # In a standard Rubik's cube, if UP is white (0) and FRONT is green (2),
-        # then LEFT would be orange (4) and RIGHT would be red (5)
-        # We need to determine the correct positions based on the specified UP and FRONT
-        if (up_color, front_color) in [(0, 2), (2, 1), (1, 3), (3, 0)]:
-            left_color, right_color = remaining_colors
-        else:
-            right_color, left_color = remaining_colors
-        
         # Assign colors to faces
-        face_colors = [up_color, down_color, front_color, back_color, left_color, right_color]
-        print(face_colors[:])
-        for i in range(6):
-            cube[i, :, :] = face_colors[i]
-    
-    return cube , face_colors
+    face_colors = [up_color, down_color, front_color,
+                   back_color, left_color, right_color]
+
+    for i in range(6):
+        cube[i, :, :] = face_colors[i]
+
+    corner = [face_colors[5], face_colors[2], face_colors[0]]
+
+    return cube, face_colors, corner
 
 def get_opposite_color(color):
     """Get the opposite color in a standard Rubik's cube."""
@@ -148,8 +152,7 @@ def get_constants():
         'circle_radii': circle_radii,
         }
     return constants
-
-    
+  
 def generate_initial_points():
     consts = get_constants()
     centers = consts['centers']
@@ -183,24 +186,20 @@ def generate_initial_points():
                                 distance = np.sqrt((point[0] - center_x)**2 + (point[1] - center_y)**2)
 
                                 # Color assignment logic
+                                
+                                if (i,j)   == (0,1): b = corner[0]
+                                elif (i,j) == (0,2): b = corner[1]
+                                elif (i,j) == (1,2): b = corner[2]
+    
                                 if (distance < 1.912 ):
-                                    # face (U/ D/ ...) ; face cube color
-                                    a = paired_center_colors[(i,j)]
-                                    color = get_color_name(a)
+                                    color = get_color_name(b)
                                     colors.append(color)
-                                    #color = 'white' #face_colors[a]
-                                    
-                                    # Inner regions - visible face colors
-                                    # color = paired_center_colors.get((i, j), 'white')
                                 else:
                                     # Outer regions - opposite colors of visible faces
-                                    b = paired_center_colors[(i,j)]                        
+                 
                                     c =get_opposite_color(b)
                                     color = get_color_name(c)
-                                    colors.append(color)
-                                    # face / cube color
-                                    #visible_color = paired_center_colors.get((i, j), 'white')
-                                    #color = opposite_colors.get(visible_color, visible_color)                                                          
+                                    colors.append(color)                                                     
     
     return intersections, colors
 
