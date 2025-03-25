@@ -42,7 +42,9 @@ The main executable script is Rubiks.py. It takes an orientation parameter of th
 ```
 # For example, if the top cube is white when you begin, with blue at right you could execute the command line
     'Rubiks_illustrator.py -x RWB -t R2L2U2D2F2B2'  to perform Right twice , Left twice, UP twice et cetera
+
 # For coding the algorithm don't use spaces between the moves
+
 # For a counterclockwise rotation replace the usual prime symbol (') by the lower case character 'i' like "inverse" (exponent "-1" in mathematical notation)
 
 ```
