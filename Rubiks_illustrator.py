@@ -82,13 +82,15 @@ def main(argv):
     cube, face_colors, corner = framesetup.initialize_cube(orientation_code = fur) 
     print('corner view  =', corner)
     initial_points, initial_colors = framesetup.generate_initial_points(corner)
-    display.create_rubiks_diagram(initial_points, initial_colors,fur ,'start')
-    # Test faces 4 clockwise
-    points_after_url, colors_after_url = perform_moves(
-        initial_points, initial_colors, 
-        moves_list
-        ) 
-    display.create_rubiks_diagram(points_after_url, colors_after_url, n, subtext)
+    
+    if len(moves_list) > 0:
+        points_after_url, colors_after_url = perform_moves(
+            initial_points, initial_colors, 
+            moves_list
+            ) 
+        display.create_rubiks_diagram(points_after_url, colors_after_url, fur, subtext)
+    else:
+        display.create_rubiks_diagram(initial_points, initial_colors,fur,'Solved_state')
 
     return 
 
