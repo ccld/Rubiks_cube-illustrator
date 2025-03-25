@@ -10,11 +10,11 @@ This project offers a novel way to visualize and simulate Rubik's Cube movements
 ### Key Features
 
 - **Intuitive Venn Diagram Visualization**: Represents the Rubik's Cube state using overlapping circles and colored nodes
-- **Move Simulation**: Accurately simulates standard Rubik's Cube rotations (U, F, R, L, D, B faces, and M, E, S middle slices)
+- **Move Simulation**: Accurately simulates standard Rubik's Cube rotations clockwise (U, F, R, L, D, B faces, and M, E, S middle slices) or counterclockwise (i)
 - **Sequence Execution**: Supports execution of multiple moves in sequence
 - **Clockwise and Counterclockwise Rotations**: Implements standard cube notation for both CW and CCW moves
 
-## How It Works
+## How pattern generation Works
 
 The representation uses three overlapping circles with concentric rings to create intersection points that correspond to the facets of a Rubik's Cube:
 
@@ -33,26 +33,18 @@ The visualization is built with Python using matplotlib for rendering. Key compo
 
 ## Usage
 
-The main executable script is Rubiks.py. It takes in a string parameter of the 3 codes colors of the chosen corner as perspective view of the cube, and optional parameters
--	a string of the sequence of twists to be performed. 
--	a cleaning flag for deleting all intermediate png file produced by the successive twists of the cube
--	an output mp4 flag for an animated output of all the diagrams produced produced by the successive twists
+The main executable script is Rubiks.py. It takes an orientation parameter of the cube on the game mat , and optional parameters
+-   a parameter -x for the string of the 3 colors of the chosen corner as perspective view of the cube, in the order FUR (Front at left, UP at top, Right at right)
+-	a parameter -t for the algorithm of twists to be performed on sequence. 
+-	a boolean flag -c (cleaning) for deleting all intermediate png file produced by the successive twists of the cube
+-	a boolean flag -a (animation) for an animated mp4 file output of all the diagrams produced produced by the successive twists
 
-```python
-# Generate the initial state with red face as Down at bottom of diagram and green face as Front at the left of diagram
-initial_points, initial_colors = generate_initial_points()
+```
+# For example, if the top cube is white when you begin, with blue at right you could execute the command line
+    'Rubiks_illustrator.py -x RWB -t R2L2U2D2F2B2'  to perform Right twice , Left twice, UP twice et cetera
+# For coding the algorithm don't use spaces between the moves
+# For a counterclockwise rotation replace the usual prime symbol (') by the lower case character 'i' like "inverse" (exponent "-1" in mathematical notation)
 
-# Visualize the initial state
-create_rubiks_diagram(initial_points, initial_colors)
-
-# Perform a sequence of moves (e.g., R U R' U')
-points_after_moves, colors_after_moves = perform_moves(
-    initial_points, initial_colors, 
-    [('R', 'cw'), ('U', 'cw'), ('R', 'ccw'), ('U', 'ccw')]
-)
-
-# Visualize the result
-create_rubiks_diagram(points_after_moves, colors_after_moves)
 ```
 
 ## Mathematical Background
@@ -80,10 +72,11 @@ pip install -r requirements.txt
 
 ## Future Enhancements
 
-- Interactive GUI for move input
+- Input of a scrambled cube to be solved
 - Solution algorithms visualization
-- Pattern generation
 - Cube state import/export
+- Interactive GUI for move input
+
 
 ## License
 
