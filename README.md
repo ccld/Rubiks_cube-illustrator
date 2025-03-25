@@ -90,4 +90,5 @@ Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 ## Acknowledgments
 
 This project was inspired by mathematical approaches to visualizing complex systems and the elegant mathematical structure of the Rubik's Cube.
-Lecture note "Slides for a Berkeley Math Circle colloquium talk on Rubik's cube, 2022." From Professor Michael Hutchings, UC Berkeley, 
+
+[Lecture note](https://math.berkeley.edu/~hutching/rubik.pdf) "Slides for a Berkeley Math Circle colloquium talk on Rubik's cube, 2022." From Professor Michael Hutchings, UC Berkeley, 
