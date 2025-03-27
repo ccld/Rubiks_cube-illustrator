@@ -160,7 +160,7 @@ def create_rubiks_diagram(points, colors, frame_number, subtext):
 
     return filename
 
-def create_animation(fur, moves_list, cleanfile= True):
+def create_animation(fur, moves_list, twists , cleanfile= True):
     subtext = 'turn'
     fps = 1
     # Create temporary directory for frames
@@ -170,30 +170,28 @@ def create_animation(fur, moves_list, cleanfile= True):
     print('anim', fur)
     cube, face_colors, corner = framesetup.initialize_cube(fur) 
     initial_points, initial_colors = framesetup.generate_initial_points(corner)
-    filename = create_rubiks_diagram(initial_points, initial_colors,0, subtext)
+    filename = create_rubiks_diagram(initial_points, initial_colors,'', 'Initial solved state')
     for x in moves_list:
         n = n +1
         k = moves_list.index(moves_list[n]) 
 
         if n == 0 :
                 subtitle = 'Set #' + '  for algorithm x' #+ str(n)
-                filename = create_rubiks_diagram(initial_points, initial_colors,0, subtext)
+                filename = create_rubiks_diagram(initial_points, initial_colors,0, twists + '-')
                 frames.append(filename)  
                 points_after, colors_after = framesetup.perform_moves(
                     initial_points, initial_colors, 
                     [(moves_list[0])]
                     )
-                #subtitle = 'Set #' + '  after rotating '+ turns[1][0] + turns[1][1] # + str(1) 
-                filename = create_rubiks_diagram(points_after, colors_after, 1, subtitle)
+                filename = create_rubiks_diagram(points_after, colors_after, 1, twists + '-')
                 frames.append(filename)  
                 print('frame ', n)
         else :
             points_after, colors_after  = framesetup.perform_moves(
                                 points_after, colors_after,
                                 [(moves_list[n])]
-                                ) 
-            #subtitle = 'Set #'+ str(n) + '  after rotating '+ turns[n][0] + turns[n][1]                    
-            filename = create_rubiks_diagram(points_after, colors_after, str(n+1), subtitle)
+                                )                   
+            filename = create_rubiks_diagram(points_after, colors_after, str(n+1), twists + '-')
             frames.append(filename)  
             print('frame ', n)
             
