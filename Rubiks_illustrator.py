@@ -56,8 +56,10 @@ def Rubiks(twists):
     return moves
 
 def main(argv):
-    up = None
+    fur = None
     turns = ''
+    outfile = False
+    cleanfile = False
     
     optlist, args = getopt.getopt(argv, "vx:t:co")
 
@@ -65,40 +67,43 @@ def main(argv):
       if o in ("-v", "--verbose"):
         vb = True
       elif o in ("-x", "--upfront"):
-          fur = a               
+          fur  = a               
       elif o in ("-t", "--twist"):
           turns = a               
       elif o in ("-c", "--clean"):
-          cleaner = True
+          cleanfile = True
       elif o in ("-o", "--output"):
           outfile = True
     
     moves_list = Rubiks(turns)
     print(f"Parsed {len(moves_list)} moves: {moves_list}")
-    print('FUR', up)    
+    print('FUR', fur) 
+
     corner=[]
       
     # Initialize the cube
+
     cube, face_colors, corner = framesetup.initialize_cube(orientation_code = fur) 
-    print('corner view  =', corner)
     initial_points, initial_colors = framesetup.generate_initial_points(corner)
-    
+    display.create_rubiks_diagram(initial_points, initial_colors,fur,'start')
+
     if len(moves_list) > 0:
-        points_after_url, colors_after_url = perform_moves(
-            initial_points, initial_colors, 
-            moves_list
-            ) 
-        display.create_rubiks_diagram(points_after_url, colors_after_url, fur, subtext)
+        if outfile:
+            display.create_animation( fur, moves_list, cleanfile= cleanfile) # output_filename=output, fps=1,
+        else:
+            points_after_url, colors_after_url = perform_moves(
+                initial_points, initial_colors, 
+                [moves_list]
+                ) 
+            display.create_rubiks_diagram(points_after_url, colors_after_url, fur, subtext)
+            
     else:
         display.create_rubiks_diagram(initial_points, initial_colors,fur,'Solved_state')
 
     return 
-
+# =======================================================
 if __name__ == "__main__":
     n=3 # for diagraam subtitle 
-    print ('Argument List:', sys.argv[1:])   
-    subtext = 'Fig'  # caption
+    print ('Argument List:', sys.argv[1:])        
+    subtext = 'Six-spots'
     main(sys.argv[1:])
-
-
-
