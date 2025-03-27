@@ -89,7 +89,7 @@ def main(argv):
 
     if len(moves_list) > 0:
         if outfile:
-            display.create_animation( fur, moves_list, cleanfile= cleanfile) # output_filename=output, fps=1,
+            display.create_animation( fur, moves_list, twists = turns, cleanfile= cleanfile) # output_filename=output, fps=1,
         else:
             points_after_url, colors_after_url = perform_moves(
                 initial_points, initial_colors, 
