@@ -197,8 +197,8 @@ def create_animation(fur, moves_list, cleanfile= True):
             frames.append(filename)  
             print('frame ', n)
             
-    fourcc = cv2.VideoWriter_fourcc(*'avc1')
-    video = cv2.VideoWriter('filename'+'.mp4', fourcc, float(fps), (512,512))
+    fourcc = cv2.VideoWriter_fourcc(*'VP80')
+    video = cv2.VideoWriter('filename'+'.mp4', fourcc, float(fps), (638,638))
     for frame in frames:
         img_path = os.path.join(os.getcwd(), frame)
         img = cv2.imread(img_path)
