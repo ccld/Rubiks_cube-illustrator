@@ -34,26 +34,31 @@ def initialize_cube(orientation_code='02'):
     }
 
     corner_colors= [
-         'BWO',
-         'BYR',
-         'GRY',
-         'GWR',
-         'GYO',
-         'OGY',
-         'OWG',
-         'OYB',
-         'RBY',
-         'RGW',
-         'RWB',
-         'RYG',
-         'WGO',
-         'WOB',
-         'WRG',
-         'YGR',
-         'YRB',
-         'YRB'
+        'BOY',
+        'BRW',
+        'BWO',
+        'BYR',
+        'GOW',
+        'GRY',
+        'GWR',
+        'GYO',
+        'OBW',
+        'OGY',
+        'OWG',
+        'OYB',
+        'RBY',
+        'RGW',
+        'RWB',
+        'RYG',
+        'WBR',
+        'WGO',
+        'WOB',
+        'WRG',
+        'YBO',
+        'YGR',
+        'YOG',
+        'YRB',
          ]
-
     fur= orientation_code
     
     if fur in corner_colors: 
