@@ -93,7 +93,7 @@ def main(argv):
         else:
             points_after_url, colors_after_url = perform_moves(
                 initial_points, initial_colors, 
-                [moves_list]
+                [(moves_list[0])]
                 ) 
             display.create_rubiks_diagram(points_after_url, colors_after_url, fur, subtext)
             
