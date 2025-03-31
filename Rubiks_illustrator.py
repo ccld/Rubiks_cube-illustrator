@@ -93,13 +93,10 @@ def main(argv):
         else:
             points_after_url, colors_after_url = perform_moves(
                 initial_points, initial_colors, 
-                [(moves_list[0])]
+                [(moves_list[:])]
                 ) 
             display.create_rubiks_diagram(points_after_url, colors_after_url, fur, subtext)
             
-    else:
-        display.create_rubiks_diagram(initial_points, initial_colors,fur,'Solved_state')
-
     return 
 # =======================================================
 if __name__ == "__main__":
