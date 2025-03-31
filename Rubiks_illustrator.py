@@ -84,18 +84,21 @@ def main(argv):
     # Initialize the cube
 
     cube, face_colors, corner = framesetup.initialize_cube(orientation_code = fur) 
-    initial_points, initial_colors = framesetup.generate_initial_points(corner)
-    display.create_rubiks_diagram(initial_points, initial_colors,fur,'start')
+    points_after_url, colors_after_url = framesetup.generate_initial_points(corner)
+    display.create_rubiks_diagram(points_after_url, colors_after_url,fur,'start')
 
     if len(moves_list) > 0:
         if outfile:
             display.create_animation( fur, moves_list, twists = turns, cleanfile= cleanfile) # output_filename=output, fps=1,
         else:
-            points_after_url, colors_after_url = perform_moves(
-                initial_points, initial_colors, 
-                [(moves_list[:])]
-                ) 
-            display.create_rubiks_diagram(points_after_url, colors_after_url, fur, subtext)
+            for move in moves_list:
+                print(move)
+                points_after_url, colors_after_url = perform_moves(
+                    points_after_url, colors_after_url,
+                    [move]
+                    ) 
+                display.create_rubiks_diagram(points_after_url, colors_after_url, fur, subtext)
+
             
     return 
 # =======================================================
