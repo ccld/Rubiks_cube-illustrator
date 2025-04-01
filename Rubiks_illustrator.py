@@ -32,7 +32,7 @@ def Rubiks(twists):
         face = char
         
         # For slice turns (M, E, S), the default direction is counterclockwise
-        if face in "BDLMES":
+        if face in "BDLME":
             direction = 'ccw'  # Default for M, E, S is counterclockwise
         else:
             direction = 'cw'  # Default for all other moves is clockwise
