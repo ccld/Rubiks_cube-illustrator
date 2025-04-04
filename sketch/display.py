@@ -100,12 +100,12 @@ def display_cube_state(cube, title=None, orientation_code=None):
 def get_color_name(color_index):
     """Convert color index to its name."""
     colors = {
-        0: "White",
-        1: "Yellow",
-        2: "Green",
-        3: "Blue",
-        4: "Orange",
-        5: "Red"
+        0: "white",
+        1: "yellow",
+        2: "green",
+        3: "blue",
+        4: "orange",
+        5: "red"
     }
     return colors.get(color_index, "Unknown")
 
