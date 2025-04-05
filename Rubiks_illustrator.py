@@ -99,7 +99,14 @@ def main(argv):
                     ) 
                 display.create_rubiks_diagram(points_after_url, colors_after_url, fur, subtext)
 
-            
+        # check 6x9 cubelets color
+    unique_colors = np.unique(colors_after_url)
+    color_counts = {color: colors_after_url.count(color) for color in unique_colors}
+    print(color_counts)
+    for color in unique_colors: 
+        if colors_after_url.count(color) != 9:
+            print(color, 'error color count')
+        else: print (color, 'OK')        
     return 
 # =======================================================
 if __name__ == "__main__":
