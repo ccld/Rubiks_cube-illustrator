@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 # =====================================================================
-
+import sys
 import numpy as np
 
-def initialize_cube(orientation_code='02'):
+def initialize_cube(orientation_code):
     """
     Initialize a 3D numpy array representing a Rubik's cube with optional orientation.
     
@@ -89,6 +89,17 @@ def initialize_cube(orientation_code='02'):
     corner = [face_colors[5], face_colors[2], face_colors[0]]
 
     return cube, face_colors, corner
+
+def get_color_center(face_color):
+    colors_digit =  {
+         "W" :0, # "white",
+         "Y" :1, # "yellow",
+         "G" :2, # "green",
+         "B" :3, # "blue",
+         "O" :4, # "orange",
+         "R" :5, # "red"
+        }
+    return colors_digit.get(face_color, "Unknown")
 
 def get_opposite_color(color):
     """Get the opposite color in a standard Rubik's cube."""
