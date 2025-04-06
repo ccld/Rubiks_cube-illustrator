@@ -169,7 +169,7 @@ def get_constants():
         }
     return constants
   
-def generate_initial_points():
+def generate_initial_points(corner):
     consts = get_constants()
     centers = consts['centers']
     circle_radii= consts['circle_radii']
