@@ -181,7 +181,7 @@ def create_animation(fur, moves_list, twists , cleanfile= True):
                 frames.append(filename)  
                 points_after, colors_after = framesetup.perform_moves(
                     initial_points, initial_colors, 
-                    [(moves_list[0])]
+                    [(moves_list[0])] , outergroups , centerpieces
                     )
                 filename = create_rubiks_diagram(points_after, colors_after, 1, twists + '-')
                 frames.append(filename)  
@@ -189,7 +189,7 @@ def create_animation(fur, moves_list, twists , cleanfile= True):
         else :
             points_after, colors_after  = framesetup.perform_moves(
                                 points_after, colors_after,
-                                [(moves_list[n])]
+                                [(moves_list[n])], outergroups , centerpieces
                                 )                   
             filename = create_rubiks_diagram(points_after, colors_after, str(n+1), twists + '-')
             frames.append(filename)  
