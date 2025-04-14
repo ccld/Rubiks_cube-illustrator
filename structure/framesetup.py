@@ -258,30 +258,29 @@ def generate_initial_points(corner):
         faceouter[face].append([x_coord, y_coord])
          
         
-    facecenter = {0: [], 1: [], 2: [], 3: [] , 4: [], 5: []}
+    centerpieces = {0: [], 1: [], 2: [], 3: [] , 4: [], 5: []}
     for idx, item in enumerate(Xcenter):
         face = item[0]
         x_coord = item[1]
         y_coord = item[2]
-        facecenter[face].append([x_coord, y_coord])
+        centerpieces[face].append([x_coord, y_coord])
         
     outergroups = {0: [], 1: [], 2: [], 3: [] , 4: [], 5: []}
     for face in faceouter:
         face_indices = []
         if face == 0: 
-            print('center UP', facecenter[face][0][0], facecenter[face][0][1] )
+            print('center UP', centerpieces[face][0][0], centerpieces[face][0][1] )
             print('outer', len(faceouter[face]), faceouter[face])  
     
         for i, point in enumerate(intersections):
             if i in faceouter[face]:
                 continue
-            sep = np.sqrt((point[0] - facecenter[face][0][0])**2 + (point[1] - facecenter[face][0][1])**2)
+            sep = np.sqrt((point[0] - centerpieces[face][0][0])**2 + (point[1] - centerpieces[face][0][1])**2)
             if 0.001 < sep < 0.7 :
                 face_indices.append(i)
-            #print(i, [point])
                 
         # Calculate the angle of each point relative to the  center
-        point_angles = [(i, np.arctan2((intersections[i][1] - facecenter[0][0][1]), (intersections[i][0]-facecenter[0][0][0]))) for i in face_indices]     
+        point_angles = [(i, np.arctan2((intersections[i][1] - centerpieces[0][0][1]), (intersections[i][0]-centerpieces[0][0][0]))) for i in face_indices]     
             # Sort points by angle to get them in order around the circle
         point_angles.sort(key=lambda x: x[1])
         sorted_indices_with_angles = [(idx, angle) for idx, angle in point_angles]
@@ -303,7 +302,7 @@ def generate_initial_points(corner):
             sorted_group = [idx for idx, angle in group]
             outergroups[face].append(sorted_group)        
         
-    return intersections, colors , outergroups
+    return intersections, colors , outergroups, centerpieces
 
 def perform_moves(points, colors, moves , outergroups):
     """
@@ -320,34 +319,140 @@ def perform_moves(points, colors, moves , outergroups):
     circle_radii= consts['circle_radii']
     current_points = points.copy()
     current_colors = colors.copy()
-   
-    for face, direction in moves:
-            if face == 'U':
-                current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[0],radius=circle_radii[0])
-                current_points, current_colors = rotate_facelet(current_points, current_colors, outergroups[0], direction)
-            elif face == 'F':
-                current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[1],radius=circle_radii[0])
-                current_points, current_colors = rotate_facelet(current_points, current_colors, outergroups[2], direction)
-            elif face == 'R':
-                current_points, current_colors = rotate_facelet(current_points, current_colors, outergroups[5], direction)
-                current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[2],radius=circle_radii[0])
-            elif face == 'L':
-                current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[2],radius=circle_radii[2])
-                current_points, current_colors = rotate_facelet(current_points, current_colors, outergroups[4], direction)
-            elif face == 'B':
-                current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[1],radius=circle_radii[2])
-                current_points, current_colors = rotate_facelet(current_points, current_colors, outergroups[3], direction)
-            elif face == 'D':
-                current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[0],radius=circle_radii[2])
-                current_points, current_colors = rotate_facelet(current_points, current_colors, outergroups[1], direction)
-            elif face == 'M':
-                current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[2],radius=circle_radii[1])
-            elif face == 'S':
-                current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[1],radius=circle_radii[1])
-            elif face == 'E':
-                current_points, current_colors = rotate_face(current_points, current_colors, direction, center=centers[0],radius=circle_radii[1])
+    # Circle center positions
+    circle_centers = {
+        0: centers[0],  # U face center
+        1: centers[0],  # D face center (same x,y as U but different radius)
+        2: centers[1],  # F face center
+        3: centers[1],  # B face center (same x,y as F but different radius)
+        4: centers[2],  # L face center
+        5: centers[2],  # R face center (same x,y as L but different radius)
+        }
+    
+    # Map face codes to indices and radius indices
+    face_map = {'U': 0, 'D': 1, 'F': 2, 'B': 3, 'L': 4, 'R': 5,
+                'M': 'M', 'S': 'S', 'E': 'E'}
+    
+    # Map faces to their appropriate radius index (0=inner, 2=outer)
+    radius_map = {'U': 0, 'D': 2, 'F': 0, 'B': 2, 'L': 2, 'R': 0}
+    
+    for face_code, direction in moves:
+        if face_code in 'UDFBLR':  # Regular face moves
+            face = face_map[face_code]
+            radius_idx = radius_map[face_code]
+            
+            # Rotate the face edges
+            current_points, current_colors = rotate_face(
+                current_points, current_colors, direction, 
+                center=circle_centers[face], radius=circle_radii[radius_idx]
+            )
+            
+            # Dynamically detect corner pieces for this specific layer
+            corner_groups = detect_layer_corners(
+                current_points, centerpieces[face], 
+                circle_radii[radius_idx], face_code
+            )
+            
+            # Rotate the corners
+            if corner_groups:
+                current_points, current_colors = rotate_facelet(
+                    current_points, current_colors, corner_groups, direction
+                )
+            
+        else:  # Middle slice moves
+            if face_code == 'M':
+                current_points, current_colors = rotate_face(
+                    current_points, current_colors, direction, 
+                    center=centers[2], radius=circle_radii[1]
+                )
+            elif face_code == 'S':
+                current_points, current_colors = rotate_face(
+                    current_points, current_colors, direction, 
+                    center=centers[1], radius=circle_radii[1]
+                )
+            elif face_code == 'E':
+                current_points, current_colors = rotate_face(
+                    current_points, current_colors, direction, 
+                    center=centers[0], radius=circle_radii[1]
+                )
     
     return current_points, current_colors
+
+def detect_layer_corners(points, centerpieces, layer_radius, face_code):
+    """
+    Detect corner pieces specifically for the layer being rotated.
+    
+    Args:
+        points: List of point coordinates
+        face_center: Center coordinates of the face
+        layer_radius: Radius of the specific layer being rotated
+        face_code: Face code (U, D, F, B, L, R)
+    
+    Returns:
+        List of corner groups for this specific layer
+    """
+    # Map face codes to indices and radius indices
+    face_map = {'U': 0, 'D': 1, 'F': 2, 'B': 3, 'L': 4, 'R': 5,
+                'M': 'M', 'S': 'S', 'E': 'E'}
+
+    # Tolerance for detecting points on the layer
+    radius_tolerance = 0.09
+    # For each face, determine where the 4 corners should be located
+    # in terms of angular regions around the face center
+    corner_regions = {
+        'U': [(-np.pi/4, np.pi/4), (np.pi/4, 3*np.pi/4), 
+              (3*np.pi/4, 5*np.pi/4), (5*np.pi/4, 7*np.pi/4)],
+        'D': [(-np.pi/4, np.pi/4), (np.pi/4, 3*np.pi/4), 
+              (3*np.pi/4, 5*np.pi/4), (5*np.pi/4, 7*np.pi/4)],
+        'F': [(-np.pi/4, np.pi/4), (np.pi/4, 3*np.pi/4), 
+              (3*np.pi/4, 5*np.pi/4), (5*np.pi/4, 7*np.pi/4)],
+        'B': [(-np.pi/4, np.pi/4), (np.pi/4, 3*np.pi/4), 
+              (3*np.pi/4, 5*np.pi/4), (5*np.pi/4, 7*np.pi/4)],
+        'L': [(-np.pi/4, np.pi/4), (np.pi/4, 3*np.pi/4), 
+              (3*np.pi/4, 5*np.pi/4), (5*np.pi/4, 7*np.pi/4)],
+        'R': [(-np.pi/4, np.pi/4), (np.pi/4, 3*np.pi/4), 
+              (3*np.pi/4, 5*np.pi/4), (5*np.pi/4, 7*np.pi/4)]
+    }
+    
+    face = face_map[face_code]
+    print('def detect_layer_corners',face)
+    print(centerpieces)
+    print('centerx', centerpieces[0][0], 'centery' ,centerpieces[0][1] )
+    print('len(points)' , len(points))
+    # Find points that could be corners for this layer
+    corner_candidates = []
+    for i, point in enumerate(points):
+        # Calculate distance from face centerpiece
+        distance = np.sqrt((point[0] - centerpieces[0][0])**2 + (point[1] - centerpieces[0][1])**2)
+        # If point is close to the layer radius, it's on the face edge and not a corner
+        if 0.001<distance < 0.7:
+            corner_candidates.append(i)
+    # Calculate the angle of each point relative to the  center
+    point_angles = [(i, np.arctan2(points[i][1] - centerpieces[0][1], points[i][0] - centerpieces[0][0])) 
+                    for i in  corner_candidates]     
+        # Sort points by angle to get them in order around the circle
+    point_angles.sort(key=lambda x: x[1])
+    sorted_indices_with_angles = [(idx, angle) for idx, angle in point_angles]
+    
+    point_angles.sort(key=lambda x: x[1])
+    
+    sorted_indices_with_angles = [(idx, angle) for idx, angle in point_angles]
+    
+    # Group into 4 sets of 2 points with their angles
+    groups_with_angles = [sorted_indices_with_angles[i:i+2] for i in range(0, 8, 2)]
+    print('4 sets',groups_with_angles)
+    # For each group, extract just the indices
+    corner_groups = []
+    for group in groups_with_angles:
+        sorted_group = [idx for idx, angle in group]
+        corner_groups.append(sorted_group)
+
+    # We should ideally have 4 groups
+    if len(corner_groups) != 4:
+        print(f"Warning: Expected 4 corner groups, found {len(corner_groups)}")
+    
+    return corner_groups
+
     
 def rotate_face(points, colors, direction, center ,radius):    
     # Find indices of points on the inner circle of the  face
@@ -356,7 +461,7 @@ def rotate_face(points, colors, direction, center ,radius):
         # Check if point is on the smallest circle of the  face (with tolerance)
         if abs(np.sqrt((point[0] - center[0])**2 + (point[1] - center[1])**2) - radius) < 0.2:
             face_indices.append(i)
-    
+
     # We should have exactly 12 points
     if len(face_indices) != 12:
         print(f"Warning: Expected 12 points on inner circle of  face, found {len(face_indices)}")
@@ -387,10 +492,10 @@ def rotate_face(points, colors, direction, center ,radius):
     
     if direction == 'cw':
         # For  face, we want to rotate counterclockwise when viewed from  side
-        shifted_groups = [groups[1], groups[2], groups[3], groups[0]]
-    else:  # cw
+        shifted_groups = groups[1:] + [groups[0]]
+    else:  # ccw
         # For  face, we want to rotate clockwise when viewed from  side
-        shifted_groups = [groups[3], groups[0], groups[1], groups[2]]
+        shifted_groups = [groups[-1]] + groups[:-1]
     
     # Apply the rotation by moving colors between groups
     for i, (orig_group, new_group) in enumerate(zip(groups, shifted_groups)):
@@ -398,19 +503,14 @@ def rotate_face(points, colors, direction, center ,radius):
             new_colors[orig_group[j]] = colors[new_group[j]]
     return points, new_colors
 
-def rotate_facelet( points, colors, groups, direction ):  
-    print('facelet_lenpoints', len(points))                                                                                                                                         
-    print('facelet_before_rotation', groups)
-    # print('facelet__colors_before_rotation', colors)
+def rotate_facelet( points, colors, corner_groups, direction ):  
     new_colors = colors.copy()
-    #origroups = groups
-    #print('facelet_origroup', origroups)
     if direction == 'cw':
         # For  face, we want to rotate counterclockwise when viewed from  side
-        shifted_groups =[groups[1], groups[2], groups[3], groups[0]]
+        shifted_groups = corner_groups[1:] + [corner_groups[0]]
     else:  # ccw
         # For  face, we want to rotate clockwise when viewed from  side
-        shifted_groups = [groups[3], groups[0], groups[1], groups[2]]
+        shifted_groups = [corner_groups[-1]] + corner_groups[:-1]
     
     # Apply the rotation by moving colors between groups
     for i, (orig_group, new_group) in enumerate(zip(groups, shifted_groups)):
