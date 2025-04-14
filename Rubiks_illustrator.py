@@ -84,7 +84,7 @@ def main(argv):
     # Initialize the cube
 
     cube, face_colors, corner = framesetup.initialize_cube(orientation_code = fur) 
-    points_after_url, colors_after_url, outergroups, outergroups = framesetup.generate_initial_points(corner)
+    points_after_url, colors_after_url, outergroups, centerpieces = framesetup.generate_initial_points(corner)
     display.create_rubiks_diagram(points_after_url, colors_after_url,fur,'start')
 
     if len(moves_list) > 0:
@@ -95,7 +95,7 @@ def main(argv):
                 print(move)
                 points_after_url, colors_after_url = perform_moves(
                     points_after_url, colors_after_url,
-                    [move], outergroups
+                    [move], outergroups,centerpieces
                     ) 
                 display.create_rubiks_diagram(points_after_url, colors_after_url, fur, subtext)
 
