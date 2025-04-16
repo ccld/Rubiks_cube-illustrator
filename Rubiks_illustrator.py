@@ -72,7 +72,7 @@ def main(argv):
           turns = a               
       elif o in ("-c", "--clean"):
           cleanfile = True
-      elif o in ("-o", "--output"):
+      elif o in ("-a", "--animation"):
           outfile = True
     
     moves_list = Rubiks(turns)
