@@ -36,8 +36,8 @@ The visualization is built with Python using matplotlib for rendering. Key compo
 The main executable script is Rubiks.py. It takes an orientation parameter of the cube on the game mat , and optional parameters
 -   a parameter -x for the string of the 3 colors of the chosen corner as perspective view of the cube, in the order FUR (Front at left, UP at top, Right at right)
 -	a parameter -t for the algorithm of twists to be performed on sequence. 
--	a boolean flag -c (cleaning) for deleting all intermediate png file produced by the successive twists of the cube
--	a boolean flag -a (animation) for an animated mp4 file output of all the diagrams produced produced by the successive twists
+-	a boolean flag -c (cleaning) for deleting all intermediate png files created by the successive twists of the cube
+-	a boolean flag -o (output) for an animated mp4 file of all the diagrams created by the successive twists of the cube
 
 ```
 # For example, if the top cube is white when you begin, with blue at right you could execute the command line
