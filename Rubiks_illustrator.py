@@ -72,7 +72,7 @@ def main(argv):
           turns = a               
       elif o in ("-c", "--clean"):
           cleanfile = True
-      elif o in ("-a", "--animation"):
+      elif o in ("-o", "--output"):
           outfile = True
     
     moves_list = Rubiks(turns)
@@ -112,5 +112,5 @@ def main(argv):
 if __name__ == "__main__":
     n=3 # for diagraam subtitle 
     print ('Argument List:', sys.argv[1:])        
-    subtext = 'Six-spots'
+    subtext = 'test'
     main(sys.argv[1:])
