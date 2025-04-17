@@ -505,19 +505,15 @@ def rotate_face(points, colors, direction, center ,radius):
 
 def rotate_facelet( points, colors, corner_groups, direction ):  
     new_colors = colors.copy()
-    if direction == 'cw'and face_code in ("UFR"):
-        # For  face, we want to rotate counterclockwise when viewed from  side
+    if direction == 'cw' and face_code in ("UFR"):
         shifted_groups = corner_groups[1:] + [corner_groups[0]]
-    else:  # ccw
-        # For  face, we want to rotate clockwise when viewed from  side
+    if direction == 'ccw' and face_code in ("UFR"): 
         shifted_groups = [corner_groups[-1]] + corner_groups[:-1]
-        
+
     if direction == 'cw' and face_code in ("BLD"):
-        # Clockwise rotation
         shifted_groups = [corner_groups[-1]] + corner_groups[:-1]
-    else:  # ccw
-        # Counter-clockwise rotation
-        shifted_groups =  corner_groups[1:] + [corner_groups[0]]
+    if direction == 'ccw' and face_code in ("BLD"):  
+        shifted_groups = corner_groups[1:] + [corner_groups[0]]
  
     # Apply the rotation by moving colors between groups
     for i, (orig_group, new_group) in enumerate(zip(groups, shifted_groups)):
