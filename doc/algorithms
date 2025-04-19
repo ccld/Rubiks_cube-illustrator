@@ -1,22 +1,49 @@
-| Rubik's Actions                             | Moves                                              |
-|---------------------------------------------|----------------------------------------------------|
-| Change edge                                 | Rr U Fr                                            |
-| Top to bottom                               | Rr Dr R                                            |
-| Facing front                                | F Dr Fr D2                                         |
-| White corner right                          | Dr Rr D R                                          |
-| White corner left                           | D L Dr Lr                                          |
-| Middle   left                               | Ur Lr U L U F Ur Fr                                |
-| Middle right                                | U R Ur Rr Ur Fr U F                                |
-| Unsolved edges if left face                 | F2 U L Rr F2 Lr R U F2                             |
-| Unsolved edges if right face                | F2 Ur Lr Rr F2 Lr R Ur F2                          |
-| Twist   two corners                         | B Rr D2 R Br U2 B Rr D2 R Br U2                    |
-| Flip two edges                              | R U D B2 U2 Br U B U B2 Dr Rr Ur                   |
-|                                             |                                                    |
-| Algorithms of last layer                    |                                                    |
-| Making   cross if you have a horizontal bar | F R U Rr Ur Fr                                     |
-| Making   cross if you have a back-left hook | F U R Ur Rr F                                      |
-| Matching   edge colours-                    | R U Rr U R U2 Rr                                   |
-| Fixing   corners                            | U R Ur Lr U Rr Ur L                                |
-| Matching corners                            | D Rr Dr R                                          |
-|                                             |                                                    |
-| Transform into superflip                    | U R2 F B R B2 R U2 L B2 R Ur Dr R2 F Rr L B2 U2 F2 |
+|  Rubik's Actions                                                                      |  Moves                                               |
+|---------------------------------------------------------------------------------------|------------------------------------------------------|
+| Commutator 1: Flipping two edges                                                      |  L E L2 Ei2  L U Li Ei2 L2 Ei Li Ui                  |
+| Commutator 2: Rotating two corners                                                    |  Fi D F L D Li U L Di Li Fi Di F Ui                  |
+| Commutator 3: cycling three corners                                                   |  L D Li U L Di Li Ui                                 |
+| Conjugation:   cycling three top corners                                              |  Fi L Fi R2 F Li Fi R2 F2                            |
+| Conjugation three top corners                                                         |  R U Ri U R U2 Ri                                    |
+|                                                                                       |                                                      |
+| Solution guide                                                                        |                                                      |
+|  Change edge                                                                          |  Ri U Fi                                             |
+|  Top to bottom                                                                        |  Ri Di R                                             |
+|  Facing front                                                                         |  F Di Fi D2                                          |
+|  White corner right                                                                   |  Di Ri D R                                           |
+|  White corner left                                                                    |  D L Di Li                                           |
+|  Middle     left                                                                      |  Ui Li U L U F Ui Fi                                 |
+|  Middle right                                                                         |  U R Ui Ri Ui Fi U F                                 |
+|  Unsolved edges if left face                                                          |  F2 U L Ri F2 Li R U F2                              |
+|  Unsolved edges if right face                                                         |  F2 Ui Li Ri F2 Li R Ui F2                           |
+|  Flip two edges                                                                       |  R U D B2 U2 Bi U B U B2 Di Ri Ui                    |
+|  Twist     two corners                                                                |  B Ri D2 R Bi U2 B Ri D2 R Bi U2                     |
+|                                                                                       |                                                      |
+|  Algorithms of last layer                                                             |                                                      |
+|  Making     cross if you have a horizontal bar                                        |  F R U Ri Ui Fi                                      |
+|  Making     cross if you have a back-left hook                                        |  F U R Ui Ri F                                       |
+|  Matching     edge colours-                                                           |  R U Ri U R U2 Ri                                    |
+|  Fixing     corners                                                                   |  U R Ui Li U Ri Ui L                                 |
+|  Matching corners                                                                     |  D Ri Di R                                           |
+|                                                                                       |                                                      |
+| Pretty patterns                                                                       |                                                      |
+| six-spots                                                                             | UDiRLiFBiUDi                                         |
+| six-spots                                                                             | ESEiSi                                               |
+| checkerboard                                                                          | U2D2R2L2F2B2                                         |
+| four spots                                                                            | F2B2UDiR2L2UDi                                       |
+| perpendicular lines                                                                   | R2U2L2R2U2L2M2                                       |
+| pong                                                                                  | UR2F2B2L2U2DR2F2B2L2                                 |
+| four crosses                                                                          | U2R2L2F2B2D2L2R2F2B2                                 |
+| vertical stripes                                                                      | FUFRL2BDiRD2LDiBR2LFUF                               |
+| checkerboard                                                                          | U2D2F2B2L2R2                                         |
+| checkerboard                                                                          | MESMES                                               |
+| checkerboard                                                                          | M2E2S2                                               |
+| deckerboard                                                                           | UDRLiFiBUDiR2UR2L2D2F2B2D                            |
+| cross                                                                                 | R2LiDF2RiDiRiLUiDRDB2RiUD2                           |
+| twist two corners                                                                     | BRiD2RBiU2BRiD2RBiU2                                 |
+| 12flips+8twists (edges / vertex)                                                      | DF2UiB2R2B2R2LBiDiFD2FB2UFiRLU2Fi                    |
+| gift box                                                                              | UB2R2B2L2F2R2DiF2L2BFiLF2DUiR2FiLiRi                 |
+| see u around                                                                          | UiB2UL2DL2R2DiBiRDiLRiB2U2FiLiUi                     |
+| chicken feet                                                                          | FLiDiBiLFUFiDiFL2BiRiUL2DiF                          |
+| diagonal crosses superflip                                                            | UR2FBRB2RU2LB2RUiDiR2FRiLB2U2F2                      |
+| diagonal crosses superflip                                                            | RiU2BLiFUiBDFUDiLD2FiRBiDFiUiBiUDi                   |
