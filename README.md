@@ -56,7 +56,7 @@ This representation leverages principles from:
 - Combinatorial topology
 - Group theory (the basis of Rubik's Cube movements)
 
-The visualization creates a mapping between the permutation group of the Rubik's Cube and a visually intuitive graph structure which is the planar graph representation skeleton of the dual octahedron.
+The visualization creates a mapping between the permutation group of the Rubik's Cube and a visually intuitive graph structure which is the planar graph representation skeleton of the dual octahedron. It recalls  that the Rubik's cube mechanism is structured on an octahedral center 3d-cross shaft connecting the center cubelets of the  six cube faces 
 
 ## Installation
 
