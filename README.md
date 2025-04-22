@@ -52,7 +52,7 @@ The main executable script is Rubiks.py. It takes an orientation parameter of th
 ## Mathematical Background
 
 This representation leverages principles from:
-- Graph theory
+- Graph theory (polyhedral graph on eight nodes)
 - Combinatorial topology
 - Group theory (the basis of Rubik's Cube movements)
 
