@@ -1,0 +1,16 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.envrc
+.venv
+venv/
+build/
+dist/
+*.egg-info
+.git
+.gitignore
+*.mp4
+*.png
+out/
