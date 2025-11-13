@@ -93,8 +93,8 @@ Notes:
 - If you reuse documentation or images, follow the CC BY‑NC 4.0 terms (attribution required; non‑commercial use only).
 - For clarity, we recommend that contributors add a short SPDX header to new source files, e.g.:  
   - For code files (Python): `# SPDX-License-Identifier: MIT` and `# Copyright (c) 2025 ccld`  
-  - For documentation or images: add a short notice like `This work is licensed under CC BY-NC 4.0: https://creativecommons.org/licenses/by-nc/4.0/`
-```
+  - For documentation or images: add a short notice like `This work is licensed under CC BY-NC 4.0: https://creativecommons.org/licenses/by-nc/4.0/
+ 
 ## Acknowledgments
 
 This project was inspired by mathematical approaches to visualizing complex systems and the elegant mathematical structure of the Rubik's Cube.
