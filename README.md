@@ -82,13 +82,19 @@ pip install -r requirements.txt
 
 ## License
 
-[![CC BY-NC](https://licensebuttons.net/l/by-nc/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc/4.0/)
-Copyright © 2025
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)  
+[![CC BY-NC 4.0](https://licensebuttons.net/l/by-nc/4.0/88x31.png)](./LICENSE-docs)
 
-This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
-To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/ or send a letter to 
-Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+- Code (source files) is licensed under the MIT License. See the repository root file: `LICENSE`.
+- Documentation, images, and artwork are licensed under the Creative Commons Attribution‑NonCommercial 4.0 International License (CC BY‑NC 4.0). See `LICENSE-docs` at the repository root.
 
+Notes:
+- If you reuse code from this project, follow the terms of the MIT license (include the copyright notice and license text).
+- If you reuse documentation or images, follow the CC BY‑NC 4.0 terms (attribution required; non‑commercial use only).
+- For clarity, we recommend that contributors add a short SPDX header to new source files, e.g.:  
+  - For code files (Python): `# SPDX-License-Identifier: MIT` and `# Copyright (c) 2025 ccld`  
+  - For documentation or images: add a short notice like `This work is licensed under CC BY-NC 4.0: https://creativecommons.org/licenses/by-nc/4.0/`
+```
 ## Acknowledgments
 
 This project was inspired by mathematical approaches to visualizing complex systems and the elegant mathematical structure of the Rubik's Cube.
