@@ -67,5 +67,4 @@
 <text x="100" y="782" font-family="sans-serif" font-size="12" fill="black">The two solids share the same centre, and duality swaps their vertices with faces:</text>
 <text x="100" y="802" font-family="sans-serif" font-size="12" fill="black">the cube's 6 faces correspond to the octahedron's 6 vertices, while its 8 vertices correspond to the octahedron's 8 faces.</text>
 </g>
-</g>
 </svg>
