@@ -65,12 +65,12 @@
 <text class="label" x="623" y="305">Back</text>
 <text class="label" x="384" y="700">Bottom</text>
 <text class="label" x="408" y="459">3</text>
-<text class="label" x="570" y="325">2</text>
+<text class="label" x="570" y="326">2</text>
 <text class="label" x="404" y="164">1</text>
-<text class="label" x="239" y="331">4</text>
-<text class="label" x="239" y="497">5</text>
+<text class="label" x="239" y="328">4</text>
+<text class="label" x="239" y="495>5</text>
 <text class="label" x="419" y="644">6</text>
-<text class="label" x="570" y="505">7</text>
+<text class="label" x="570" y="495">7</text>
 <!-- ── Title ──────────────────────────────────────────────────────── -->
 <text x="108" y="42" font-family="sans-serif" font-size="18" font-weight="bold" fill="black">A cube and its dual octahedron</text>
 
