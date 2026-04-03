@@ -28,12 +28,12 @@
 <polygon class="face-fill" points="262,328 262,495 412,631 412,476"/>
 
 <!-- ── Three symmetry circles ────────────────────────────────────── -->
-<!-- circle centre (307, 487) r≈205 -->
-<circle class="grey-stroke" cx="307" cy="487" r="205.01"/>
+<!-- circle centre (307, 485) r≈205 -->
+<circle class="grey-stroke" cx="307" cy="485" r="205"/>
 <!-- circle centre (512, 485) r≈205 -->
-<circle class="grey-stroke" cx="512" cy="485" r="205.97"/>
+<circle class="grey-stroke" cx="512" cy="485" r="205"/>
 <!-- circle centre (405, 309) r≈205 -->
-<circle class="grey-stroke" cx="405" cy="309" r="205.12"/>
+<circle class="grey-stroke" cx="405" cy="307" r="205"/>
 
 <!-- ── Cube edges (blue) ──────────────────────────────────────────── -->
 <!-- Front face: 412,476 → 560,326 → 412,178 → 262,328 → close -->
@@ -44,9 +44,9 @@
 
 <!-- ── Dot markers ────────────────────────────────────────────────── -->
 <use href="#dot" x="307" y="487"/> <!-- Front  -->
-<use href="#dot" x="512" y="485"/> <!-- Right  -->
-<use href="#dot" x="405" y="309"/> <!-- Top    -->
-<use href="#dot" x="610" y="302"/> <!-- Back   -->
+<use href="#dot" x="512" y="484"/> <!-- Right  -->
+<use href="#dot" x="408" y="309"/> <!-- Top    -->
+<use href="#dot" x="610" y="304"/> <!-- Back   -->
 <use href="#dot" x="412" y="476"/> <!-- 3      -->
 <use href="#dot" x="560" y="326"/> <!-- 2      -->
 <use href="#dot" x="410" y="178"/> <!-- 1      -->
