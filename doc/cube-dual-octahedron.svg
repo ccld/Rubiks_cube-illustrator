@@ -58,19 +58,19 @@
 <use href="#dot" x="410" y="664"/> <!-- extra  -->
 
 <!-- ── Labels ────────────────────────────────────────────────────── -->
-<text class="label" x="322" y="484">Front</text>
-<text class="label" x="462" y="478">Right</text>
+<text class="label" x="322" y="480">Front</text>
+<text class="label" x="462" y="480">Right</text>
 <text class="label" x="401" y="341">Top</text>
 <text class="label" x="155" y="310">Left</text>
 <text class="label" x="623" y="305">Back</text>
 <text class="label" x="384" y="700">Bottom</text>
 <text class="label" x="408" y="459">3</text>
-<text class="label" x="578" y="325">2</text>
+<text class="label" x="569" y="325">2</text>
 <text class="label" x="404" y="164">1</text>
 <text class="label" x="239" y="331">4</text>
 <text class="label" x="239" y="497">5</text>
 <text class="label" x="419" y="644">6</text>
-<text class="label" x="565" y="505">7</text>
+<text class="label" x="569" y="505">7</text>
 <!-- ── Title ──────────────────────────────────────────────────────── -->
 <text x="108" y="42" font-family="sans-serif" font-size="18" font-weight="bold" fill="black">A cube and its dual octahedron</text>
 
