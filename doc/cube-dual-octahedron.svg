@@ -10,6 +10,7 @@
     .dot-fill    { fill: rgb(21,101,192); }
     .dot-stroke  { fill: none; stroke: rgb(0,0,0); }
     .label       { fill: rgb(21,101,192); font-family: geogebra-sans-serif, sans-serif; font-size: 16px; }
+    .txt       	 { fill: #FF8000; font-family: geogebra-sans-serif, sans-serif; font-size: 16px; }	
     .caption     { font-family: sans-serif; font-size: 12px; fill: black; }
   </style>
 
@@ -30,10 +31,18 @@
 <!-- ── Three symmetry circles ────────────────────────────────────── -->
 <!-- circle centre (307, 485) r≈205 -->
 <circle class="grey-stroke" cx="307" cy="485" r="205"/>
+<circle class="grey-stroke" cx="307" cy="485" r="185" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
+<circle class="grey-stroke" cx="307" cy="485" r="225" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
+  
 <!-- circle centre (512, 485) r≈205 -->
 <circle class="grey-stroke" cx="512" cy="485" r="205"/>
+<circle class="grey-stroke" cx="512" cy="485" r="185" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
+<circle class="grey-stroke" cx="512" cy="485" r="225" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
+  
 <!-- circle centre (405, 309) r≈205 -->
 <circle class="grey-stroke" cx="405" cy="307" r="205"/>
+<circle class="grey-stroke" cx="405" cy="307" r="225" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
+<circle class="grey-stroke" cx="405" cy="307" r="185" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
 
 <!-- ── Cube edges (blue) ──────────────────────────────────────────── -->
 <!-- Front face: 412,476 → 560,326 → 412,178 → 262,328 → close -->
@@ -43,10 +52,12 @@
 <polyline class="blue-stroke" points="262,328 262,495 412,631"/>
 
 <!-- ── Dot markers ────────────────────────────────────────────────── -->
-<use href="#dot" x="307" y="487"/> <!-- Front  -->
-<use href="#dot" x="512" y="484"/> <!-- Right  -->
-<use href="#dot" x="408" y="309"/> <!-- Top    -->
-<use href="#dot" x="610" y="304"/> <!-- Back   -->
+<circle r="8" cx="307" cy="487" fill="red" /> <!-- Front  -->
+<circle r="8" cx="512" cy="484" fill="blue" /> <!-- Right  -->
+<circle r="8" cx="408" cy="309" fill="white" /> <!-- Top    -->
+<circle r="8" cx="610" cy="304" fill="orange" /> <!-- Back   -->
+<circle r="8" cx="200" cy="312" fill="green" /> <!-- Left -->
+<circle r="8" cx="410" cy="664" fill="yellow" /> <!-- Bottom  -->  
 <use href="#dot" x="412" y="476"/> <!-- 3      -->
 <use href="#dot" x="560" y="326"/> <!-- 2      -->
 <use href="#dot" x="410" y="178"/> <!-- 1      -->
@@ -54,16 +65,14 @@
 <use href="#dot" x="411" y="631"/> <!-- 6      -->
 <use href="#dot" x="560" y="495"/> <!-- 7      -->
 <use href="#dot" x="264" y="495"/> <!-- 5      -->
-<use href="#dot" x="200" y="312"/> <!-- extra  -->
-<use href="#dot" x="410" y="664"/> <!-- extra  -->
 
 <!-- ── Labels ────────────────────────────────────────────────────── -->
-<text class="label" x="322" y="480">Front</text>
-<text class="label" x="460" y="484">Right</text>
-<text class="label" x="401" y="341">Top</text>
-<text class="label" x="155" y="310">Left</text>
-<text class="label" x="623" y="305">Back</text>
-<text class="label" x="384" y="700">Bottom</text>
+<text class="txt" x="322" y="480">Front</text>
+<text class="txt" x="460" y="484">Right</text>
+<text class="txt" x="401" y="341">Top</text>
+<text class="txt" x="155" y="310">Left</text>
+<text class="txt" x="623" y="305">Back</text>
+<text class="txt" x="384" y="700">Bottom</text>
 <text class="label" x="408" y="459">3</text>
 <text class="label" x="570" y="326">2</text>
 <text class="label" x="404" y="164">1</text>
