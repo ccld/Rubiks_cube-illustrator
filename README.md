@@ -56,7 +56,7 @@ This representation leverages principles from:
 - Combinatorial topology
 - Group theory (the basis of Rubik's Cube movements)
 
-<img src="https://raw.githubusercontent.com/ccld/Rubiks_cube-illustrator/4ecce645b68a8ede3ab4f766838d79bec12264c9/doc/cube-dual-octahedron.svg" width="640">
+<img src="https://raw.githubusercontent.com/ccld/Rubiks_cube-illustrator/41c0834fcc5c5088f24e15f65f6f0abeb3d7c11c/doc/cube-dual-octahedron.svg" width="640">
 
 
 The visualization creates a mapping between the permutation group of the Rubik's Cube and a visually intuitive graph structure which is the planar graph representation skeleton of the dual octahedron. It recalls  that the Rubik's cube mechanism is structured on an octahedral core 3d-cross shaft connecting the center cubelets and the core so that each face can rotate as a unit.
