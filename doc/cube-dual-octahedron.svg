@@ -24,62 +24,66 @@
 <rect fill="white" x="0" y="0" width="890" height="890"/>
 
 <!-- ── Shaded quad faces ─────────────────────────────────────────── -->
-<polygon class="face-fill" points="412,476 560,326 412,178 262,328"/>
-<polygon class="face-fill" points="412,476 412,631 560,495 560,326"/>
-<polygon class="face-fill" points="262,328 262,495 412,631 412,476"/>
+<polygon class="face-fill" points="412,396 560,330 412,264 262,330"/>
+<polygon class="face-fill" points="412,396 412,586 560,520 560,330"/>
+<polygon class="face-fill" points="262,330 262,520 412,586 412,396"/>
 
 <!-- ── Three symmetry circles ────────────────────────────────────── -->
 <!-- circle centre (307, 485) r≈205 -->
-<circle class="grey-stroke" cx="307" cy="485" r="205"/>
-<circle class="grey-stroke" cx="307" cy="485" r="185" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
-<circle class="grey-stroke" cx="307" cy="485" r="225" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
-  
+<circle class="grey-stroke" cx="307" cy="485" r="205" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
+<circle class="grey-stroke" cx="307" cy="485" r="185" />
+<circle class="grey-stroke" cx="307" cy="485" r="165" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
 <!-- circle centre (512, 485) r≈205 -->
-<circle class="grey-stroke" cx="512" cy="485" r="205"/>
-<circle class="grey-stroke" cx="512" cy="485" r="185" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
-<circle class="grey-stroke" cx="512" cy="485" r="225" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
-  
+<circle class="grey-stroke" cx="512" cy="485" r="205" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
+<circle class="grey-stroke" cx="512" cy="485" r="185"/>
+<circle class="grey-stroke" cx="512" cy="485" r="165" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
 <!-- circle centre (405, 309) r≈205 -->
-<circle class="grey-stroke" cx="405" cy="307" r="205"/>
-<circle class="grey-stroke" cx="405" cy="307" r="225" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
-<circle class="grey-stroke" cx="405" cy="307" r="185" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
+<circle class="grey-stroke" cx="405" cy="307" r="205" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
+<circle class="grey-stroke" cx="405" cy="307" r="165" stroke-width="1" stroke-dasharray="1, 10" stroke-opacity="0.4"/>
+<circle class="grey-stroke" cx="405" cy="307" r="185" />
 
 <!-- ── Cube edges (blue) ──────────────────────────────────────────── -->
-<!-- Front face: 412,476 → 560,326 → 412,178 → 262,328 → close -->
-<polygon class="blue-stroke" points="412,476 560,326 412,178 262,328"/>
+<!-- Front face: 412,441 → 560,326 → 412,178 → 262,328 → close -->
+<polygon class="blue-stroke" points="412,396 560,330 412,264 262,330"/>
 <!-- Side/bottom face edges -->
-<polyline class="blue-stroke" points="412,476 412,631 560,495 560,326"/>
-<polyline class="blue-stroke" points="262,328 262,495 412,631"/>
+<polyline class="blue-stroke" points="412,396 412,586 560,520 560,330"/>
+<polyline class="blue-stroke" points="262,330 262,520 412,586"/>
 
 <!-- ── Dot markers ────────────────────────────────────────────────── -->
-<circle r="8" cx="307" cy="487" fill="red" /> <!-- Front  -->
-<circle r="8" cx="512" cy="484" fill="blue" /> <!-- Right  -->
-<circle r="8" cx="408" cy="309" fill="white" /> <!-- Top    -->
-<circle r="8" cx="610" cy="304" fill="orange" /> <!-- Back   -->
-<circle r="8" cx="200" cy="312" fill="green" /> <!-- Left -->
-<circle r="8" cx="410" cy="664" fill="yellow" /> <!-- Bottom  -->  
-<use href="#dot" x="412" y="476"/> <!-- 3      -->
-<use href="#dot" x="560" y="326"/> <!-- 2      -->
-<use href="#dot" x="410" y="178"/> <!-- 1      -->
-<use href="#dot" x="262" y="328"/> <!-- 4      -->
-<use href="#dot" x="411" y="631"/> <!-- 6      -->
-<use href="#dot" x="560" y="495"/> <!-- 7      -->
-<use href="#dot" x="264" y="495"/> <!-- 5      -->
+<!-- use href="#dot" x="307" y="487"/ --> <!-- Front  -->
+<circle r="8" cx="327" cy="475" fill="red" />
+<!-- use href="#dot" x="512" y="484"/ --> <!-- Right  -->
+<circle r="8" cx="492" cy="470" fill="blue" />
+<!-- use href="#dot" x="408" y="319"/ --> <!-- Top    -->
+<circle r="8" cx="408" cy="329" fill="white" />
+<!-- use href="#dot" x="610" y="304"/ --> <!-- Back   -->
+<circle r="8" cx="590" cy="315" fill="orange" />
+<use href="#dot" x="412" y="396"/> <!-- 3      -->
+<use href="#dot" x="560" y="330"/> <!-- 2      -->
+<use href="#dot" x="410" y="264"/> <!-- 1      -->
+<use href="#dot" x="262" y="330"/> <!-- 4      -->
+<use href="#dot" x="411" y="586"/> <!-- 6      -->
+<use href="#dot" x="560" y="520"/> <!-- 7      -->
+<use href="#dot" x="264" y="520"/> <!-- 5      -->
+
+<circle r="8" cx="220" cy="322" fill="green" /> <!-- Left -->
+<circle r="8" cx="410" cy="640" fill="yellow" /> <!-- Bottom  -->
 
 <!-- ── Labels ────────────────────────────────────────────────────── -->
-<text class="txt" x="322" y="480">Front</text>
-<text class="txt" x="460" y="484">Right</text>
-<text class="txt" x="401" y="341">Top</text>
-<text class="txt" x="155" y="310">Left</text>
+<text class="txt" x="342" y="470">Front</text>
+<text class="txt" x="440" y="470">Right</text>
+<text class="txt" x="398" y="305">Top</text>
+<text class="txt" x="160" y="310">Left</text>
 <text class="txt" x="623" y="305">Back</text>
-<text class="txt" x="384" y="700">Bottom</text>
-<text class="label" x="408" y="459">3</text>
-<text class="label" x="570" y="326">2</text>
-<text class="label" x="404" y="164">1</text>
-<text class="label" x="239" y="328">4</text>
-<text class="label" x="239" y="495">5</text>
-<text class="label" x="419" y="644">6</text>
-<text class="label" x="570" y="495">7</text>
+<text class="txt" x="384" y="690">Bottom</text>
+<text class="label" x="420" y="415">3</text>
+<text class="label" x="575" y="333">2</text>
+<text class="label" x="404" y="253">1</text>
+<text class="label" x="239" y="333">4</text>
+<text class="label" x="239" y="525">5</text>
+<text class="label" x="409" y="610">6</text>
+<text class="label" x="575" y="525">7</text>
+
 <!-- ── Title ──────────────────────────────────────────────────────── -->
 <text x="108" y="42" font-family="sans-serif" font-size="18" font-weight="bold" fill="black">A cube and its dual octahedron</text>
 
