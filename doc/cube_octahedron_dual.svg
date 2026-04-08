@@ -1,0 +1,94 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="960" height="960">
+
+<defs>
+  <style>
+    .brown-stroke { fill: none; stroke: #A89A7A; stroke-opacity: 0.98; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .black-stroke { fill: none; stroke: rgb(0,0,0); stroke-opacity: 0.7; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .face-fill    { fill: #F8E8B8; fill-opacity: 0.7; stroke: none; fill-rule: evenodd; }
+    .dot-blue     { fill: #818BA3; stroke: rgb(0,0,0); stroke-width: 1.2; }
+    .dot-red      { fill: rgb(204,0,0);   stroke: rgb(0,0,0); stroke-width: 1.2; }
+  </style>
+
+  <!-- Blue corner dot -->
+  <symbol id="dot-blue" overflow="visible">
+    <circle r="5" class="dot-blue"/>
+  </symbol>
+
+  <!-- Red intersection dot -->
+  <symbol id="dot-red" overflow="visible">
+    <circle r="5" class="dot-red"/>
+  </symbol>
+</defs>
+
+<rect fill="white" x="0" y="0" width="960" height="960"/>
+
+<!-- ── Shaded quad faces ────────────────────────────────── -->
+<polygon class="face-fill"
+  points="515.5,277.75 701.5,322.75 518.0,418.76 334.27,327.47"/>
+
+<polygon class="face-fill"
+  points="334.27,327.47 347.80,488.63 519.10,656.55 518.0,418.76"/>
+
+<polygon class="face-fill"
+  points="518.0,418.76 519.10,656.55 687.02,485.25 701.5,322.75"/>
+
+<!-- ── Three symmetry circles ─────────────────────────── -->
+<!-- C1: center (373.0, 513.3), r=244.5 -->
+<circle class="black-stroke" cx="373.0"  cy="513.3" r="244.5"/>
+
+<!-- C2: center (656.6, 516.3), r=245.6 -->
+<circle class="black-stroke" cx="656.6"  cy="516.3" r="245.6"/>
+
+<!-- C3: center (515.9, 314.9), r=171.1 -->
+<circle class="black-stroke" cx="515.9"  cy="314.9" r="171.1"/>
+
+<!-- ── Cube edges ──────────────────────────────────────── -->
+<!-- Top face (quad) -->
+<polygon class="brown-stroke" fill="none"
+  points="515.5,277.75 701.5,322.75 518.0,418.76 334.27,327.47"/>
+
+<!-- Two vertical + bottom edges (open polylines) -->
+<polyline class="brown-stroke" fill="none"
+  points="334.27,327.47 347.80,488.63 519.10,656.55 518.0,418.76"/>
+
+<polyline class="brown-stroke" fill="none"
+  points="701.5,322.75 687.02,485.25 519.10,656.55"/>
+
+<!-- ── Blue dots: 7 visible cube corners ─────────────── -->
+<use href="#dot-blue" x="515.5"  y="277.75"/>
+<use href="#dot-blue" x="701.5"  y="322.75"/>
+<use href="#dot-blue" x="518.0"  y="418.76"/>
+<use href="#dot-blue" x="334.27" y="327.47"/>
+<use href="#dot-blue" x="347.80" y="488.63"/>
+<use href="#dot-blue" x="519.10" y="656.55"/>
+<use href="#dot-blue" x="687.02" y="485.25"/>
+
+<!-- ── Red dots: 6 circle–circle intersections ────────── -->
+<!-- C1∩C2 -->
+<circle r="13" cx="515.9" cy="314.9" fill="white" />
+<circle r="13" cx="511.7" cy="714.6" fill="yellow" />
+<!-- C1∩C3 -->
+<circle r="13" cx="350.9" cy="269.8" fill="green" />
+<circle r="13" cx="611.0" cy="457.2" fill="blue" />
+<!-- C2∩C3 -->
+<circle r="13" cx="418.6" cy="455.6" fill="red" />
+<circle r="13" cx="681.5" cy="271.9" fill="orange" />
+
+<!-- ── Labels for circle intersections ───────────────── -->
+<text class="label" x="515.9"  y="341.9"  text-anchor="middle">Top</text>
+<text class="label" x="511.7"  y="751.6"  text-anchor="middle">Bottom</text>
+<text class="label" x="338.9"  y="265.8"  text-anchor="end">Left</text>
+<text class="label" x="693.5"  y="267.9"  text-anchor="start">Back</text>
+<text class="label" x="406.6"  y="470.6"  text-anchor="end">Front</text>
+<text class="label" x="623.0"  y="470.6"  text-anchor="start">Right</text>
+
+<!-- ── Title ──────────────────────────────────────────────────────── -->
+<text x="108" y="102" font-family="sans-serif" font-size="18" font-weight="bold" fill="black">A cube and its dual octahedron</text>
+
+<!-- ── Captions ───────────────────────────────────────────────────── -->
+<text class="caption" x="100" y="802">The six face-centres of the cube (Front, Back, Left, Right, Top, Bottom) are the vertices of a regular octahedron (its dual polyhedron).</text>
+<text class="caption" x="100" y="822">Each of the three circles passes through four face-centres lying in a common plane of symmetry of the cube.</text>
+<text class="caption" x="100" y="842">The two solids share the same centre, and duality swaps their vertices with faces:</text>
+<text class="caption" x="100" y="862">the cube's 6 faces correspond to the octahedron's 6 vertices, while its 8 vertices correspond to the octahedron's 8 faces.</text>
+
+</svg>
