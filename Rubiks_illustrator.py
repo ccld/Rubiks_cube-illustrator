@@ -93,7 +93,7 @@ def main(argv):
         else:
             for move in moves_list:
                 print(move)
-                points_after_url, colors_after_url = perform_moves(
+                points_after_url, colors_after_url = framesetup.perform_moves(
                     points_after_url, colors_after_url,
                     [move], outergroups,centerpieces
                     ) 
